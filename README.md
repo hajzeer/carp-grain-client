@@ -4,6 +4,8 @@
 
 e-commerce project for World Carp Classic Champion with headless CMS Sanity.io
 
+DEMO: Soon
+
 ## Technical stack
 
 1. Next.js
