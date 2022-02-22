@@ -7,7 +7,7 @@ import gsap from "gsap";
 
 const ButtonStyled = styled.button`
   width: 40px;
-  height: 40px;
+  height: 50px;
   position: relative;
   background: transparent;
   border: none;

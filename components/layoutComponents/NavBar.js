@@ -82,7 +82,7 @@ const ListContainer = styled.div`
   width: 100%;
   height: ${(props) => (props.active ? "auto" : "0")};
   overflow: hidden;
-  transition: transform 0.4s ease-out;
+  transition: transform 0.3s ease-out;
   transform: ${(props) => (props.active ? "scaleY(1)" : "scaleY(0)")};
 
   transform-origin: top;
@@ -166,7 +166,9 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
       </Link>
       <ValueContainer>
         <InnerValueContainer>
-          <Paragraph onClick={handlerIsVisible}>KATEGORIE</Paragraph>
+          <Paragraph onClick={() => setIsActive({ first: !isActive.first })}>
+            KATEGORIE
+          </Paragraph>
           <ImageOuterButton
             active={isActive.first}
             onClick={() => setIsActive({ first: !isActive.first })}>
@@ -179,7 +181,9 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
       </ValueContainer>
       <ValueContainer>
         <InnerValueContainer>
-          <Paragraph onClick={handlerIsVisible}>PRODUCENCI</Paragraph>
+          <Paragraph onClick={() => setIsActive({ second: !isActive.second })}>
+            PRODUCENCI
+          </Paragraph>
           <ImageOuterButton
             active={isActive.second}
             onClick={() => setIsActive({ second: !isActive.second })}>

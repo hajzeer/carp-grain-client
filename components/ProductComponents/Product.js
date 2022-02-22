@@ -1,18 +1,23 @@
 /** @format */
 
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 import { zIndex, colors, fontWeight } from "../../utils";
 
 const Container = styled.div`
   width: 170px;
-  height: 350px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 10px 0 0;
+  cursor: pointer;
+`;
+
+const Anchor = styled.a`
+  width: 100%;
+  height: 100%;
 `;
 
 const Title = styled.h2`
@@ -61,24 +66,29 @@ const TitleContainer = styled.div`
   align-items: flex-start;
 `;
 
-const Products = ({ item }) => {
+const Products = ({ item, value }) => {
+  console.log(item);
   return (
     <Container>
-      <ImageContainer>
-        <Image
-          src={item.images[0].asset.url}
-          layout='responsive'
-          width='150px'
-          height='150px'
-          objectFit='cover'
-        />
-      </ImageContainer>
-      <TitleContainer>
-        <Title>{item.title}</Title>
-      </TitleContainer>
-      <TextContainer>
-        <PriceParagraph>{item.price} zł</PriceParagraph>
-      </TextContainer>
+      <Link href={`/products/${value.slug.current}`}>
+        <Anchor>
+          <ImageContainer>
+            <Image
+              src={item.images[0].asset.url}
+              layout='responsive'
+              width='150px'
+              height='150px'
+              objectFit='cover'
+            />
+          </ImageContainer>
+          <TitleContainer>
+            <Title>{item.title}</Title>
+          </TitleContainer>
+          <TextContainer>
+            <PriceParagraph>{item.price} zł</PriceParagraph>
+          </TextContainer>
+        </Anchor>
+      </Link>
     </Container>
   );
 };

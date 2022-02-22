@@ -7,6 +7,7 @@ import ProductsList from "../components/ProductComponents/ProductList";
 import Layout from "../layout/Layout";
 import { colors, zIndex } from "../utils";
 import sanityClient from "../utils/client";
+import Image from "next/image";
 
 const HelperContainer = styled.div`
   width: 100%;
@@ -31,6 +32,10 @@ const InnerContainer = styled.div`
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const Subject = styled.h2`
   color: ${colors.ligthGreyHEX};
@@ -60,6 +65,7 @@ export default function Home() {
     sanityClient
       .fetch(
         `*[_type=="product"]{
+          slug,
         categories[]->,
                   defaultProductVariant{
                   title,
@@ -97,7 +103,10 @@ export default function Home() {
     <Layout>
       <HelperContainer>
         <HeroImage />
-        <ButtonStyled onClick={handleScroll}>Rozpocznij</ButtonStyled>
+        <ButtonStyled onClick={handleScroll}>
+          Naciśnij i sprawdź <br />
+          <Image src='/arrow.png' width={20} height={20} />
+        </ButtonStyled>
       </HelperContainer>
       <Container>
         <Subject id='theFirst'>Nowości</Subject>

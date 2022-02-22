@@ -14,7 +14,7 @@ const ProductsList = ({ items, value }) => {
       return (
         <Container>
           {element.title === value ? (
-            <Products item={item.defaultProductVariant} />
+            <Products item={item.defaultProductVariant} value={item} />
           ) : null}
         </Container>
       );
