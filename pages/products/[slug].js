@@ -163,6 +163,18 @@ const ArrowButtonPrev = styled.button`
   z-index: ${zIndex.level5};
   cursor: pointer;
 
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: ${zIndex.levelMinus1};
+    background: rgba(0, 0, 0, 0.5);
+    filter: blur(8px);
+  }
+
   &:active {
     transform: translateX(-5px);
   }
@@ -178,6 +190,18 @@ const ArrowButtonNext = styled.button`
   transition-duration: 0.2s;
   z-index: ${zIndex.level5};
   cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: ${zIndex.levelMinus1};
+    background: rgba(0, 0, 0, 0.5);
+    filter: blur(8px);
+  }
   &:active {
     transform: translateX(5px);
   }
@@ -186,7 +210,6 @@ const ArrowButtonNext = styled.button`
 const ProductPage = ({ product }) => {
   const [current, setCurrent] = useState(0);
   const myRef = useRef();
-  console.log(product);
 
   const ImageArray = product.defaultProductVariant.images.length;
 

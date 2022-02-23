@@ -9,7 +9,7 @@ import Image from "next/image";
 import sanityClient from "../../utils/client";
 import DefaultList from "./navBarComponents/DefaultList";
 
-const Container = styled.section`
+const Container = styled.div`
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -20,6 +20,15 @@ const Container = styled.section`
   justify-content: center;
   background: ${colors.darkGreyHEX};
   z-index: ${zIndex.level7};
+`;
+
+const InnerDiv = styled.div`
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+
+  overflow: auto;
 `;
 
 const Helper = styled.div`
@@ -152,55 +161,58 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
   }, [isVisible]);
   return (
     <Container ref={NavBarRef}>
-      <Helper ref={NavBarHelper} />
+      <InnerDiv>
+        <Helper ref={NavBarHelper} />
 
-      <Link href='/'>
-        <Anchor onClick={handlerIsVisible}>HOME</Anchor>
-      </Link>
+        <Link href='/'>
+          <Anchor onClick={handlerIsVisible}>HOME</Anchor>
+        </Link>
 
-      <Link href='/about'>
-        <Anchor onClick={handlerIsVisible}>O NAS</Anchor>
-      </Link>
-      <Link href='/products'>
-        <Anchor onClick={handlerIsVisible}>PRODUKTY</Anchor>
-      </Link>
-      <ValueContainer>
-        <InnerValueContainer>
-          <Paragraph onClick={() => setIsActive({ first: !isActive.first })}>
-            KATEGORIE
-          </Paragraph>
-          <ImageOuterButton
-            active={isActive.first}
-            onClick={() => setIsActive({ first: !isActive.first })}>
-            <Image src='/arrow.png' width={20} height={20} />
-          </ImageOuterButton>
-        </InnerValueContainer>
-        <ListContainer active={isActive.first}>
-          <DefaultList items={isCategory} />
-        </ListContainer>
-      </ValueContainer>
-      <ValueContainer>
-        <InnerValueContainer>
-          <Paragraph onClick={() => setIsActive({ second: !isActive.second })}>
-            PRODUCENCI
-          </Paragraph>
-          <ImageOuterButton
-            active={isActive.second}
-            onClick={() => setIsActive({ second: !isActive.second })}>
-            <Image src='/arrow.png' width={20} height={20} />
-          </ImageOuterButton>
-        </InnerValueContainer>
-        <ListContainer active={isActive.second}>
-          <DefaultList items={isProducer} />
-        </ListContainer>
-      </ValueContainer>
-      <Link href='/rules'>
-        <Anchor onClick={handlerIsVisible}>REGULAMIN</Anchor>
-      </Link>
+        <Link href='/about'>
+          <Anchor onClick={handlerIsVisible}>O NAS</Anchor>
+        </Link>
+        <Link href='/products'>
+          <Anchor onClick={handlerIsVisible}>PRODUKTY</Anchor>
+        </Link>
+        <ValueContainer>
+          <InnerValueContainer>
+            <Paragraph onClick={() => setIsActive({ first: !isActive.first })}>
+              KATEGORIE
+            </Paragraph>
+            <ImageOuterButton
+              active={isActive.first}
+              onClick={() => setIsActive({ first: !isActive.first })}>
+              <Image src='/arrow.png' width={20} height={20} />
+            </ImageOuterButton>
+          </InnerValueContainer>
+          <ListContainer active={isActive.first}>
+            <DefaultList items={isCategory} />
+          </ListContainer>
+        </ValueContainer>
+        <ValueContainer>
+          <InnerValueContainer>
+            <Paragraph
+              onClick={() => setIsActive({ second: !isActive.second })}>
+              PRODUCENCI
+            </Paragraph>
+            <ImageOuterButton
+              active={isActive.second}
+              onClick={() => setIsActive({ second: !isActive.second })}>
+              <Image src='/arrow.png' width={20} height={20} />
+            </ImageOuterButton>
+          </InnerValueContainer>
+          <ListContainer active={isActive.second}>
+            <DefaultList items={isProducer} />
+          </ListContainer>
+        </ValueContainer>
+        <Link href='/rules'>
+          <Anchor onClick={handlerIsVisible}>REGULAMIN</Anchor>
+        </Link>
 
-      <Link href='/contact'>
-        <Anchor onClick={handlerIsVisible}>KONTAKT</Anchor>
-      </Link>
+        <Link href='/contact'>
+          <Anchor onClick={handlerIsVisible}>KONTAKT</Anchor>
+        </Link>
+      </InnerDiv>
     </Container>
   );
 };

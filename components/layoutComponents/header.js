@@ -4,7 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import { zIndex } from "../../utils";
+import { colors, zIndex } from "../../utils";
 import Hamburger from "./hamburger";
 import Cart from "./cart";
 import NavBar from "./NavBar";
@@ -22,8 +22,11 @@ const Container = styled.header`
 `;
 
 const BluredDiv = styled.div`
-  height: 60px;
+  height: 70px;
   width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  box-shadow: 2em 0 2em ${colors.defaultBlackHEX};
 
   position: absolute;
   bottom: 0;
@@ -31,8 +34,6 @@ const BluredDiv = styled.div`
   margin: 0;
   padding: 0;
   z-index: ${zIndex.level9};
-
-  filter: blur(8px);
 `;
 
 const InnerContainer = styled.div`
