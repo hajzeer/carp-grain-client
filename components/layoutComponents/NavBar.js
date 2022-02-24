@@ -93,7 +93,9 @@ const ListContainer = styled.div`
   overflow: hidden;
   transition: transform 0.3s ease-out;
   transform: ${(props) => (props.active ? "scaleY(1)" : "scaleY(0)")};
-
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   transform-origin: top;
 `;
 
@@ -114,8 +116,9 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
     sanityClient
       .fetch(
         `*[_type=="category"]{
-        title
-                }`
+            title,
+            slug
+          }`
       )
       .then((data) => {
         setIsCategory(data);
@@ -126,8 +129,9 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
     sanityClient
       .fetch(
         `*[_type=="producent"]{
-        title
-                }`
+            title,
+            slug
+          }`
       )
       .then((data) => {
         setIsProducer(data);
@@ -161,9 +165,9 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
   }, [isVisible]);
   return (
     <Container ref={NavBarRef}>
-      <InnerDiv>
-        <Helper ref={NavBarHelper} />
+      <Helper ref={NavBarHelper} />
 
+      <InnerDiv>
         <Link href='/'>
           <Anchor onClick={handlerIsVisible}>HOME</Anchor>
         </Link>
@@ -186,7 +190,11 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
             </ImageOuterButton>
           </InnerValueContainer>
           <ListContainer active={isActive.first}>
-            <DefaultList items={isCategory} />
+            <DefaultList
+              items={isCategory}
+              path='categories'
+              handleClose={handlerIsVisible}
+            />
           </ListContainer>
         </ValueContainer>
         <ValueContainer>
@@ -202,7 +210,11 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
             </ImageOuterButton>
           </InnerValueContainer>
           <ListContainer active={isActive.second}>
-            <DefaultList items={isProducer} />
+            <DefaultList
+              items={isProducer}
+              path='producers'
+              handleClose={handlerIsVisible}
+            />
           </ListContainer>
         </ValueContainer>
         <Link href='/rules'>

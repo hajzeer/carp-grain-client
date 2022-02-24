@@ -1,17 +1,24 @@
 /** @format */
 
 import styled from "styled-components";
-import { colors } from "../../../utils";
+import { colors, fontWeight } from "../../../utils";
+import Link from "next/link";
 
-const Paragraph = styled.h3`
+const Anchor = styled.a`
   color: ${colors.ligthGreyHEX};
-  margin: 30px 50px;
+  margin: 10px 50px;
   text-transform: uppercase;
+  font-size: 20px;
+  font-weight: ${fontWeight.fontWeightReagular};
 `;
 
-const DefaultList = ({ items }) => {
-  return items.map(({ title }) => {
-    return <Paragraph>{title}</Paragraph>;
+const DefaultList = ({ items, path, handleClose }) => {
+  return items.map(({ title, slug }) => {
+    return (
+      <Link href={`/${path}/${slug.current}`}>
+        <Anchor onClick={handleClose}>{title}</Anchor>
+      </Link>
+    );
   });
 };
 

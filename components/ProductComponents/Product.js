@@ -6,8 +6,9 @@ import Link from "next/link";
 import { zIndex, colors, fontWeight } from "../../utils";
 
 const Container = styled.div`
+  margin: 5px;
   width: 170px;
-  height: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,28 +19,32 @@ const Container = styled.div`
 const Anchor = styled.a`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.h2`
   color: ${colors.ligthGreyHEX};
   font-size: 15px;
-  margin: 0 0 0 10px;
   font-weight: ${fontWeight.fontWeightMedium};
+  margin: 0;
+  width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const PriceParagraph = styled.p`
   text-transform: uppercase;
   color: ${colors.ligthGreyHEX};
-  margin: 0 0 0 10px;
   font-weight: ${fontWeight.fontWeightMedium};
+  margin: 0;
 `;
 
 const ImageContainer = styled.div`
   width: 95%;
   height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+
   padding: 0;
   display: block;
 `;
@@ -67,11 +72,10 @@ const TitleContainer = styled.div`
 `;
 
 const Products = ({ item, value }) => {
-  console.log(item);
   return (
-    <Container>
-      <Link href={`/products/${value.slug.current}`}>
-        <Anchor>
+    <Link href={`/products/${value.slug.current}`}>
+      <Anchor>
+        <Container>
           <ImageContainer>
             <Image
               src={item.images[0].asset.url}
@@ -87,9 +91,9 @@ const Products = ({ item, value }) => {
           <TextContainer>
             <PriceParagraph>{item.price} zł</PriceParagraph>
           </TextContainer>
-        </Anchor>
-      </Link>
-    </Container>
+        </Container>
+      </Anchor>
+    </Link>
   );
 };
 

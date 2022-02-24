@@ -3,10 +3,13 @@
 import { useState, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 import Layout from "../../layout/Layout";
 import SanityClient from "../../utils/client";
 import { colors, fontWeight, zIndex } from "../../utils";
-
+import BlockContent from "@sanity/block-content-to-react";
+import YouTube from "react-youtube";
+import getYouTubeId from "get-youtube-id";
 import { useSwipeable } from "react-swipeable";
 
 const Container = styled.div`
@@ -35,7 +38,7 @@ const AboutContainer = styled.div`
   padding: 0 0 20% 0;
 `;
 
-const Subject = styled.h2`
+const Subject = styled.h1`
   width: 80%;
   color: ${colors.ligthGreyHEX};
   margin: 20px 0 15px 0;
@@ -43,18 +46,43 @@ const Subject = styled.h2`
   text-align: center;
 `;
 
-const Paragraph = styled.p`
-  color: ${colors.ligthGreyHEX};
-  margin: 15px 25px;
+const ContentContainer = styled.div`
+  margin: 20px;
+  width: 100%;
+
+  h1 {
+    color: ${colors.ligthGreyHEX};
+    margin: 15px;
+  }
+  h2 {
+    color: ${colors.ligthGreyHEX};
+    margin: 15px;
+  }
+  h3 {
+    color: ${colors.ligthGreyHEX};
+    margin: 15px;
+  }
+  h4 {
+    color: ${colors.ligthGreyHEX};
+    margin: 15px;
+  }
+
+  p {
+    color: ${colors.ligthGreyHEX};
+    margin: 15px;
+  }
+
+  iframe {
+    width: 100%;
+  }
 `;
 
 const AddCartButton = styled.button`
   position: relative;
   border: none;
   background: ${colors.defaultBlackHEX};
-  border-radius: 5px;
-  width: 90%;
-  height: 50px;
+  width: 85%;
+  height: 45px;
   color: ${colors.ligthGreyHEX};
   font-size: 20px;
   text-transform: uppercase;
@@ -70,8 +98,7 @@ const AddCartButton = styled.button`
     left: 0;
     width: 100%;
     height: 100%;
-    transform: scale(1.05);
-    border-radius: 5px;
+    transform: scale(1.01);
     z-index: ${zIndex.leve1};
     transition-duration: 0.1s;
   }
@@ -128,16 +155,6 @@ const ImageDiv = styled.div`
   position: fixed;
   width: 100%;
   height: 60vh;
-
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 60vh;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.2);
-  }
 `;
 
 const ScrollButton = styled.button`
@@ -149,6 +166,7 @@ const ScrollButton = styled.button`
   position: absolute;
   top: 65%;
   right: 20px;
+  transform: rotate(180deg);
 `;
 
 const ArrowButtonPrev = styled.button`
@@ -207,8 +225,32 @@ const ArrowButtonNext = styled.button`
   }
 `;
 
+const LogoAnchor = styled.a`
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const serializers = {
+  types: {
+    youtube: ({ node }) => {
+      const { url } = node;
+      const id = getYouTubeId(url);
+      return <YouTube videoId={id} />;
+    },
+  },
+};
+
 const ProductPage = ({ product }) => {
   const [current, setCurrent] = useState(0);
+  const [isSelected, setIsSelected] = useState(null);
   const myRef = useRef();
 
   const ImageArray = product.defaultProductVariant.images.length;
@@ -248,7 +290,6 @@ const ProductPage = ({ product }) => {
       inline: "nearest",
     });
   };
-
   return (
     <Layout>
       <Container>
@@ -277,24 +318,47 @@ const ProductPage = ({ product }) => {
         </HelperContainer>
         <AboutContainer>
           <Subject>{product.title}</Subject>
+          {isSelected != null && product.variants ? (
+            <Subject>{isSelected} zł</Subject>
+          ) : (
+            <Subject>{product.defaultProductVariant.price} zł</Subject>
+          )}
+
           <ScrollButton onClick={handleScroll}>
             <Image src='/arrow.png' width={20} height={20} />
           </ScrollButton>
-          <Paragraph id='paragraph'>
-            {product.body.pl[0].children[0].text}
-          </Paragraph>
+          <ContentContainer>
+            <BlockContent blocks={product.body.pl} serializers={serializers} />
+          </ContentContainer>
+          <Link href={`/producers/${product.producent.slug.current}`}>
+            <LogoAnchor>
+              <Image
+                src={product.producent.logo.asset.url}
+                layout='fixed'
+                width={200}
+                height={200}
+                objectFit='contain'
+              />
+            </LogoAnchor>
+          </Link>
           {product.variants ? (
-            <SelectStyled>
+            <SelectStyled
+              value={isSelected}
+              onChange={(e) => setIsSelected(e.target.value)}>
+              <option value='none' selected hidden>
+                --- select variant ---
+              </option>
+
               {product.variants.map((item) => {
                 return (
-                  <option>
+                  <option value={item.price}>
                     {item.title}, {item.price}zł
                   </option>
                 );
               })}
             </SelectStyled>
           ) : null}
-          <AddCartButton> add to cart </AddCartButton>
+          <AddCartButton id='paragraph'> add to cart </AddCartButton>
         </AboutContainer>
       </Container>
     </Layout>
@@ -317,8 +381,17 @@ export async function getStaticProps(context) {
     `
       *[_type == "product" && slug.current == $slug][0] {
         slug,
-        categories,
-        producent,
+        producent->{
+          title,
+          slug{
+            current,
+          },
+          logo{
+            asset->{
+              url
+            }
+          }
+        },
         title,
         body,
         variants,
