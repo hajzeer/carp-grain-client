@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useCallback, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +11,7 @@ import BlockContent from "@sanity/block-content-to-react";
 import YouTube from "react-youtube";
 import getYouTubeId from "get-youtube-id";
 import { useSwipeable } from "react-swipeable";
+import { CartContext } from "../../context/cartContext";
 
 const Container = styled.div`
   width: 100%;
@@ -251,7 +252,11 @@ const serializers = {
 const ProductPage = ({ product }) => {
   const [current, setCurrent] = useState(0);
   const [isSelected, setIsSelected] = useState(null);
+  const [isParsed, setIsParsed] = useState(null);
+
   const myRef = useRef();
+
+  const { cart, setCart } = useContext(CartContext);
 
   const ImageArray = product.defaultProductVariant.images.length;
 
@@ -290,6 +295,59 @@ const ProductPage = ({ product }) => {
       inline: "nearest",
     });
   };
+
+  const handleAdd = () => {
+    let value = 1;
+
+    const productPrice = 0;
+    const variantTitle = null;
+    const variantKey = null;
+    if (isSelected != null) {
+      productPrice = isParsed.price;
+    } else {
+      productPrice = product.defaultProductVariant.price;
+    }
+
+    if (isParsed != null) {
+      variantTitle = isParsed.title;
+    } else {
+      variantTitle = null;
+    }
+
+    if (isParsed != null) {
+      variantKey = isParsed._key;
+    } else {
+      variantKey = product._id;
+    }
+    console.log(variantKey);
+    console.log(isParsed);
+    const productAdded = {
+      id: product._id,
+      key: variantKey,
+      title: product.title,
+      variant: variantTitle,
+      Images: product.defaultProductVariant.images[0].asset.url,
+      capacity: value,
+      price: value * productPrice,
+    };
+    const exist = cart.find((x) => x.key === productAdded.key);
+    if (exist) {
+      setCart(
+        cart.map((x) =>
+          x.key === productAdded.key
+            ? { ...exist, capacity: exist.capacity + 1 }
+            : x
+        )
+      );
+    } else {
+      setCart((currentState) => [...currentState, productAdded]);
+    }
+  };
+
+  useEffect(() => {
+    if (isSelected) setIsParsed(JSON.parse(isSelected));
+  }, [isSelected]);
+
   return (
     <Layout>
       <Container>
@@ -318,8 +376,8 @@ const ProductPage = ({ product }) => {
         </HelperContainer>
         <AboutContainer>
           <Subject>{product.title}</Subject>
-          {isSelected != null && product.variants ? (
-            <Subject>{isSelected} zł</Subject>
+          {isParsed != null && product.variants ? (
+            <Subject>{isParsed.price} zł</Subject>
           ) : (
             <Subject>{product.defaultProductVariant.price} zł</Subject>
           )}
@@ -344,21 +402,23 @@ const ProductPage = ({ product }) => {
           {product.variants ? (
             <SelectStyled
               value={isSelected}
-              onChange={(e) => setIsSelected(e.target.value)}>
+              onChange={(e) => setIsSelected([e.target.value])}>
               <option value='none' selected hidden>
                 --- select variant ---
               </option>
 
               {product.variants.map((item) => {
                 return (
-                  <option value={item.price}>
+                  <option value={JSON.stringify(item)}>
                     {item.title}, {item.price}zł
                   </option>
                 );
               })}
             </SelectStyled>
           ) : null}
-          <AddCartButton id='paragraph'> add to cart </AddCartButton>
+          <AddCartButton onClick={handleAdd} id='paragraph'>
+            add to cart
+          </AddCartButton>
         </AboutContainer>
       </Container>
     </Layout>
@@ -380,6 +440,7 @@ export async function getStaticProps(context) {
   const product = await SanityClient.fetch(
     `
       *[_type == "product" && slug.current == $slug][0] {
+        _id,
         slug,
         producent->{
           title,

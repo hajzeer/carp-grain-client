@@ -1,10 +1,12 @@
 /** @format */
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext, useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { colors, zIndex, fontSize, fontWeight } from "../../utils";
 import gsap from "gsap";
+import CartItemList from "./cactComponents/CartItemList";
+import { CartContext } from "../../context/cartContext";
 
 const Container = styled.section`
   position: fixed;
@@ -14,7 +16,7 @@ const Container = styled.section`
   top: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background: ${colors.darkGreyHEX};
   z-index: ${zIndex.level7};
 `;
@@ -27,11 +29,64 @@ const Helper = styled.div`
   z-index: ${zIndex.level6};
 `;
 
+const Paragraph = styled.p`
+  color: ${colors.ligthGreyHEX};
+  font-size: 15px;
+  font-weight: ${fontWeight.fontWeightMedium};
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+`;
+
+const FinalContainer = styled.div`
+  width: 100%;
+  position: fixed;
+  bottom: 20%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SubmitButton = styled.button`
+  position: relative;
+  border: none;
+  background: ${colors.defaultBlackHEX};
+  width: 85%;
+  height: 45px;
+  color: ${colors.ligthGreyHEX};
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: ${fontWeight.fontWeightMedium};
+  margin: 0;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    border: 2px solid ${colors.ligthGreyHEX};
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.01);
+    z-index: ${zIndex.leve1};
+    transition-duration: 0.1s;
+  }
+
+  &:active::after {
+    transform: scale(1);
+  }
+`;
+
 const Cart = ({ isVisible }) => {
   const NavBarRef = useRef(null);
   const NavBarRefTween = useRef(null);
   const NavBarHelper = useRef(null);
   const NavBarHelperTween = useRef(null);
+  const [isFinalPrice, setIsFinalPrice] = useState(0);
+
+  const { cart } = useContext(CartContext);
 
   useEffect(() => {
     if (isVisible.clicked === true) {
@@ -56,10 +111,27 @@ const Cart = ({ isVisible }) => {
     }
   }, [isVisible]);
 
+  useEffect(() => {
+    let total = 0;
+    for (let el in cart) {
+      total += cart[el].price * cart[el].capacity;
+      const value = parseFloat(total.toFixed(2));
+      setIsFinalPrice(value);
+    }
+  });
   return (
     <Container ref={NavBarRef}>
       <Helper ref={NavBarHelper} />
-      Empty Cart Component
+      <CartItemList items={cart} />
+      <FinalContainer>
+        {cart.length !== 0 ? (
+          <Paragraph>wartość koszyka: {isFinalPrice} zł</Paragraph>
+        ) : (
+          <Paragraph>wartość koszyka: 0,00 zł</Paragraph>
+        )}
+
+        <SubmitButton>submit</SubmitButton>
+      </FinalContainer>
     </Container>
   );
 };
