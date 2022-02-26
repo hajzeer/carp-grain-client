@@ -125,12 +125,12 @@ const Cart = ({ isVisible }) => {
       <CartItemList items={cart} />
       <FinalContainer>
         {cart.length !== 0 ? (
-          <Paragraph>wartość koszyka: {isFinalPrice} zł</Paragraph>
+          <Paragraph>wartość koszyka: {isFinalPrice.toFixed(2)} zł</Paragraph>
         ) : (
           <Paragraph>wartość koszyka: 0,00 zł</Paragraph>
         )}
 
-        <SubmitButton>submit</SubmitButton>
+        <SubmitButton>PRZEJDŹ DO PŁATNOŚCI</SubmitButton>
       </FinalContainer>
     </Container>
   );

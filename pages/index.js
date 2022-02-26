@@ -8,6 +8,7 @@ import Layout from "../layout/Layout";
 import { colors, zIndex } from "../utils";
 import sanityClient from "../utils/client";
 import Image from "next/image";
+import Link from "next/link";
 
 const HelperContainer = styled.div`
   width: 100%;
@@ -57,6 +58,10 @@ const ButtonStyled = styled.button`
   z-index: ${zIndex.level3};
 `;
 
+const Anchor = styled.a`
+  text-decoration: none;
+`;
+
 export default function Home() {
   const [isData, setIsData] = useState(Array);
   const [isLoading, setLoading] = useState(false);
@@ -67,7 +72,9 @@ export default function Home() {
         `*[_type=="product"]{
           slug,
         categories[]->,
+        variants,
                   defaultProductVariant{
+                  discount,
                   title,
                   price,
                   images[]{
@@ -109,7 +116,11 @@ export default function Home() {
         </ButtonStyled>
       </HelperContainer>
       <Container>
-        <Subject id='theFirst'>Nowości</Subject>
+        <Link href='/categories/nowosci'>
+          <Anchor>
+            <Subject id='theFirst'>Nowości</Subject>
+          </Anchor>
+        </Link>
         <InnerContainer>
           {isLoading ? (
             <ProductsList value='nowości' items={isData} />
@@ -117,7 +128,11 @@ export default function Home() {
             <p>loading</p>
           )}
         </InnerContainer>
-        <Subject>Promocje</Subject>
+        <Link href='/categories/promocje'>
+          <Anchor>
+            <Subject>Promocje</Subject>
+          </Anchor>
+        </Link>
         <InnerContainer>
           {isLoading ? (
             <ProductsList value='promocje' items={isData} />
@@ -125,7 +140,11 @@ export default function Home() {
             <p>loading</p>
           )}
         </InnerContainer>
-        <Subject>Ulubione produkty</Subject>
+        <Link href='/categories/popularne'>
+          <Anchor>
+            <Subject>Popularne</Subject>
+          </Anchor>
+        </Link>
         <InnerContainer>
           {isLoading ? (
             <ProductsList value='ulubione' items={isData} />

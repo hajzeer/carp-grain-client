@@ -40,7 +40,6 @@ const FieldsetStyled = styled.fieldset`
 const SelectButton = styled.button`
   width: 40px;
   height: 40px;
-  outline: none;
   border: none;
   background: transparent;
   transition: all 0.4s;
@@ -164,7 +163,9 @@ export async function getStaticProps(context) {
     *[_type == "product" && producent->.slug.current == $slug] {
             slug,
         title,
+        variants,
         defaultProductVariant{
+            discount,
             title,
             price,
             images[]{

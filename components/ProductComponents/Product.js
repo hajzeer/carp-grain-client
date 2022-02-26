@@ -5,15 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { zIndex, colors, fontWeight } from "../../utils";
 
-const Container = styled.div`
-  margin: 5px;
+const Container = styled.button`
   width: 170px;
-  height: 200px;
+  height: 230px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  background: transparent;
+  border: none;
+  font-family: "Prompt", sans-serif;
 `;
 
 const Anchor = styled.a`
@@ -29,7 +31,7 @@ const Title = styled.h2`
   font-size: 15px;
   font-weight: ${fontWeight.fontWeightMedium};
   margin: 0;
-  width: 170px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -39,6 +41,18 @@ const PriceParagraph = styled.p`
   color: ${colors.ligthGreyHEX};
   font-weight: ${fontWeight.fontWeightMedium};
   margin: 0;
+  width: 100%;
+  justify-self: flex-start;
+`;
+
+const DiscountParagraph = styled.p`
+  text-transform: uppercase;
+  color: #ff2727;
+  font-weight: ${fontWeight.fontWeightBold};
+  font-size: 20px;
+  margin: 0;
+  width: 100%;
+  justify-self: flex-start;
 `;
 
 const ImageContainer = styled.div`
@@ -89,7 +103,12 @@ const Products = ({ item, value }) => {
             <Title>{item.title}</Title>
           </TitleContainer>
           <TextContainer>
-            <PriceParagraph>{item.price} zł</PriceParagraph>
+            <PriceParagraph>{item.price.toFixed(2)} zł</PriceParagraph>
+            {item.discount != null ? (
+              <DiscountParagraph>
+                {item.discount.toFixed(2)} zł
+              </DiscountParagraph>
+            ) : null}
           </TextContainer>
         </Container>
       </Anchor>

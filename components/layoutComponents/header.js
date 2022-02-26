@@ -1,13 +1,14 @@
 /** @format */
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import { colors, zIndex } from "../../utils";
+import { colors, fontWeight, zIndex } from "../../utils";
 import Hamburger from "./hamburger";
 import Cart from "./cart";
 import NavBar from "./NavBar";
+import { CartContext } from "../../context/cartContext";
 
 const Container = styled.header`
   position: fixed;
@@ -33,7 +34,7 @@ const BluredDiv = styled.div`
   left: 0;
   margin: 0;
   padding: 0;
-  z-index: ${zIndex.level9};
+  z-index: ${zIndex.level7};
 `;
 
 const InnerContainer = styled.div`
@@ -48,7 +49,7 @@ const InnerContainer = styled.div`
 `;
 
 const ImageStyled = styled(Image)`
-  z-index: ${zIndex.level9};
+  z-index: ${zIndex.level8};
 `;
 
 const ButtonContainer = styled.div`
@@ -77,6 +78,23 @@ const ButtonStyled = styled.button`
   justify-content: center;
 `;
 
+const CartStock = styled.p`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  bottom: 25px;
+  left: 80px;
+  background: ${colors.ligthGreyHEX};
+  border-radius: 100%;
+  color: ${colors.defaultBlackHEX};
+  z-index: ${zIndex.level9};
+  font-weight: ${fontWeight.fontWeightBold};
+`;
+
 const Header = () => {
   const [isVisible, setIsVisible] = useState({
     initial: false,
@@ -87,6 +105,8 @@ const Header = () => {
     initial: false,
     clicked: null,
   });
+
+  const { cart } = useContext(CartContext);
 
   const handleHamburger = () => {
     if (isVisible.initial === false) {
@@ -143,6 +163,7 @@ const Header = () => {
 
         <ButtonContainer>
           <ButtonStyled onClick={handleCart}>
+            <CartStock>{cart.length}</CartStock>
             <ImageStyled src='/cart.svg' width='30' height='30' quality='100' />
           </ButtonStyled>
         </ButtonContainer>

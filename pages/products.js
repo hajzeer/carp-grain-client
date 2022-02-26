@@ -100,7 +100,9 @@ const Products = () => {
       .fetch(
         `*[_type=="product"]{
             slug,
+            variants,
             defaultProductVariant{
+              discount,
                 title,
                 price,
                 images[]{

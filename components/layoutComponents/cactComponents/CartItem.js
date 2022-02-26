@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../context/cartContext";
 import { colors } from "../../../utils";
 
@@ -41,8 +41,8 @@ const ParagraphTitle = styled.p`
 `;
 
 const RemoveButton = styled.button`
-  width: 10px;
-  height: 10px;
+  width: 35px;
+  height: 35px;
   margin: 5px;
   padding: 0;
   background: none;
@@ -59,6 +59,7 @@ const ImageStyled = styled(Image)`
 
 const CartItem = ({ item }) => {
   const { cart, setCart } = useContext(CartContext);
+  const [isProductFinalPrice, setIsProductFinalPrice] = useState(0);
   const removeItem = (item) => {
     setCart(
       cart.filter((removeItem) => {
@@ -66,6 +67,11 @@ const CartItem = ({ item }) => {
       })
     );
   };
+
+  useEffect(() => {
+    setIsProductFinalPrice(item.capacity * item.price);
+  });
+
   return (
     <Container>
       <RemoveButton onClick={() => removeItem(item)}>X</RemoveButton>
@@ -78,7 +84,7 @@ const CartItem = ({ item }) => {
         <Paragraph> </Paragraph>
       )}
       <Paragraph>{item.capacity}</Paragraph>
-      <ParagraphPrice>{item.capacity * item.price} zł</ParagraphPrice>
+      <ParagraphPrice>{isProductFinalPrice.toFixed(2)} zł</ParagraphPrice>
     </Container>
   );
 };

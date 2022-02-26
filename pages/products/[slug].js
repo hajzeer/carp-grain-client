@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "../../layout/Layout";
 import SanityClient from "../../utils/client";
-import { colors, fontWeight, zIndex } from "../../utils";
+import { colors, fontSize, fontWeight, zIndex } from "../../utils";
 import BlockContent from "@sanity/block-content-to-react";
 import YouTube from "react-youtube";
 import getYouTubeId from "get-youtube-id";
@@ -42,7 +42,17 @@ const AboutContainer = styled.div`
 const Subject = styled.h1`
   width: 80%;
   color: ${colors.ligthGreyHEX};
-  margin: 20px 0 15px 0;
+  margin: 15px 0 0 0;
+  font-size: ${fontSize.bigFont};
+  padding: 0;
+  text-align: center;
+`;
+
+const PriceSubject = styled.h2`
+  width: 80%;
+  color: ${(props) => (props.discount ? "#FF2727" : `${colors.ligthGreyHEX}`)};
+  margin: 15px 0 0 0;
+  font-size: ${(props) => (props.discount ? `40px` : `${fontSize.bigFont}`)};
   padding: 0;
   text-align: center;
 `;
@@ -76,6 +86,15 @@ const ContentContainer = styled.div`
   iframe {
     width: 100%;
   }
+
+  ul {
+    color: ${colors.ligthGreyHEX};
+  }
+
+  a {
+    text-decoration: underline;
+    color: ${colors.midGreyHEX};
+  }
 `;
 
 const AddCartButton = styled.button`
@@ -83,7 +102,7 @@ const AddCartButton = styled.button`
   border: none;
   background: ${colors.defaultBlackHEX};
   width: 85%;
-  height: 45px;
+  height: 60px;
   color: ${colors.ligthGreyHEX};
   font-size: 20px;
   text-transform: uppercase;
@@ -163,7 +182,6 @@ const ScrollButton = styled.button`
   height: 40px;
   background: transparent;
   border: none;
-  outline: none;
   position: absolute;
   top: 65%;
   right: 20px;
@@ -305,7 +323,13 @@ const ProductPage = ({ product }) => {
     if (isSelected != null) {
       productPrice = isParsed.price;
     } else {
-      productPrice = product.defaultProductVariant.price;
+      productPrice = product.defaultProductVariant.price.toFixed(2);
+    }
+
+    if (isSelected != null && isParsed.discount != null) {
+      productPrice = isParsed.discount;
+    } else if (product.defaultProductVariant.discount) {
+      productPrice = product.defaultProductVariant.discount;
     }
 
     if (isParsed != null) {
@@ -319,8 +343,7 @@ const ProductPage = ({ product }) => {
     } else {
       variantKey = product._id;
     }
-    console.log(variantKey);
-    console.log(isParsed);
+
     const productAdded = {
       id: product._id,
       key: variantKey,
@@ -347,7 +370,6 @@ const ProductPage = ({ product }) => {
   useEffect(() => {
     if (isSelected) setIsParsed(JSON.parse(isSelected));
   }, [isSelected]);
-
   return (
     <Layout>
       <Container>
@@ -377,10 +399,23 @@ const ProductPage = ({ product }) => {
         <AboutContainer>
           <Subject>{product.title}</Subject>
           {isParsed != null && product.variants ? (
-            <Subject>{isParsed.price} zł</Subject>
+            <PriceSubject>{isParsed.price.toFixed(2)} zł</PriceSubject>
           ) : (
-            <Subject>{product.defaultProductVariant.price} zł</Subject>
+            <PriceSubject>
+              {product.defaultProductVariant.price.toFixed(2)} zł
+            </PriceSubject>
           )}
+          {product.defaultProductVariant.discount ? (
+            <PriceSubject discount>
+              {product.defaultProductVariant.discount.toFixed(2)} zł
+            </PriceSubject>
+          ) : null}
+
+          {isParsed != null && product.variants && isParsed.discount ? (
+            <PriceSubject discount>
+              {isParsed.discount.toFixed(2)} zł
+            </PriceSubject>
+          ) : null}
 
           <ScrollButton onClick={handleScroll}>
             <Image src='/arrow.png' width={20} height={20} />
@@ -410,15 +445,25 @@ const ProductPage = ({ product }) => {
               {product.variants.map((item) => {
                 return (
                   <option value={JSON.stringify(item)}>
-                    {item.title}, {item.price}zł
+                    {item.title},{" "}
+                    {item.discount
+                      ? item.discount.toFixed(2)
+                      : item.price.toFixed(2)}
+                    zł
                   </option>
                 );
               })}
             </SelectStyled>
           ) : null}
-          <AddCartButton onClick={handleAdd} id='paragraph'>
-            add to cart
-          </AddCartButton>
+          {isParsed != null || !product.variants ? (
+            <AddCartButton onClick={handleAdd} id='paragraph'>
+              Dodaj do koszyka
+            </AddCartButton>
+          ) : (
+            <AddCartButton id='paragraph'>
+              Wybierz rodzaj produktu
+            </AddCartButton>
+          )}
         </AboutContainer>
       </Container>
     </Layout>
@@ -442,6 +487,7 @@ export async function getStaticProps(context) {
       *[_type == "product" && slug.current == $slug][0] {
         _id,
         slug,
+        categories[]->,
         producent->{
           title,
           slug{
@@ -457,6 +503,7 @@ export async function getStaticProps(context) {
         body,
         variants,
         defaultProductVariant {
+          discount,
           price,
         images[]{
           asset->{
