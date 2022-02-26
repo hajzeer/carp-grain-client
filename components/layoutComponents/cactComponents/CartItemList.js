@@ -20,7 +20,7 @@ const CartItemList = ({ items }) => {
   return (
     <Container>
       {items.map((item) => {
-        return <CartItem item={item} />;
+        return <CartItem key={item._id} item={item} />;
       })}
     </Container>
   );

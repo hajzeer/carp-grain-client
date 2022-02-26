@@ -12,7 +12,7 @@ const ProductsList = ({ items, value }) => {
   return items.map((item) => {
     return item.categories.map((element) => {
       return (
-        <Container>
+        <Container key={items.id}>
           {element.title === value ? (
             <Products item={item.defaultProductVariant} value={item} />
           ) : null}

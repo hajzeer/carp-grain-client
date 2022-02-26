@@ -444,7 +444,7 @@ const ProductPage = ({ product }) => {
 
               {product.variants.map((item) => {
                 return (
-                  <option value={JSON.stringify(item)}>
+                  <option key={item._id} value={JSON.stringify(item)}>
                     {item.title},{" "}
                     {item.discount
                       ? item.discount.toFixed(2)

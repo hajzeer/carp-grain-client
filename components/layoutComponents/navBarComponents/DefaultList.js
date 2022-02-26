@@ -15,7 +15,7 @@ const Anchor = styled.a`
 const DefaultList = ({ items, path, handleClose }) => {
   return items.map(({ title, slug }) => {
     return (
-      <Link href={`/${path}/${slug.current}`}>
+      <Link key={items.id} href={`/${path}/${slug.current}`}>
         <Anchor onClick={handleClose}>{title}</Anchor>
       </Link>
     );

@@ -14,7 +14,7 @@ const Container = styled.div`
 const ProductsListForPage = ({ items }) => {
   return items.map((item) => {
     return (
-      <Container>
+      <Container key={items.id}>
         <Products item={item.defaultProductVariant} value={item} />
       </Container>
     );
