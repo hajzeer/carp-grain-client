@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState, useRef, useContext, useCallback, useEffect } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
@@ -477,7 +477,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
+    fallback: "blocking",
   };
 }
 export async function getStaticProps(context) {

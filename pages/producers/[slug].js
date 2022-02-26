@@ -1,5 +1,5 @@
 /** @format */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
@@ -153,7 +153,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
+    fallback: "blocking",
   };
 }
 export async function getStaticProps(context) {
