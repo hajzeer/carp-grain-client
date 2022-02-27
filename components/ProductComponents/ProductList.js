@@ -12,11 +12,13 @@ const ProductsList = ({ items, value }) => {
   return items.map((item) => {
     return item.categories.map((element) => {
       return (
-        <Container key={items.id}>
+        <>
           {element.title === value ? (
-            <Products item={item.defaultProductVariant} value={item} />
+            <Container key={items.id}>
+              <Products item={item.defaultProductVariant} value={item} />
+            </Container>
           ) : null}
-        </Container>
+        </>
       );
     });
   });

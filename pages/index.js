@@ -31,6 +31,7 @@ const InnerContainer = styled.div`
   width: 100%;
   height: 250px;
   display: flex;
+  justify-content: flex-start;
   overflow-y: hidden;
   overflow-x: scroll;
 
