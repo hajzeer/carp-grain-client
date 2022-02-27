@@ -7,14 +7,16 @@ import { CartContext } from "../../../context/cartContext";
 import { colors } from "../../../utils";
 
 const Container = styled.div`
-  width: 100%;
+  width: 96%;
   height: 80px;
   padding: 10px 0 10px 0;
+  margin: 5px 0 0 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  background: #777777;
   border-bottom: 0.5px solid ${colors.defaultBlackHEX};
 `;
 

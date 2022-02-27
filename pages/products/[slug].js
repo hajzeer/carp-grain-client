@@ -424,7 +424,7 @@ const ProductPage = ({ product }) => {
             <SelectStyled
               value={isSelected}
               onChange={(e) => setIsSelected([e.target.value])}>
-              <option value='none' selected hidden>
+              <option value='none' selected disabled hidden>
                 --- select variant ---
               </option>
 
