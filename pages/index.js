@@ -147,7 +147,7 @@ export default function Home() {
         </Link>
         <InnerContainer>
           {isLoading ? (
-            <ProductsList value='ulubione' items={isData} />
+            <ProductsList value='popularne' items={isData} />
           ) : (
             <p>loading</p>
           )}
