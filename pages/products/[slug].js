@@ -420,20 +420,6 @@ const ProductPage = ({ product }) => {
           <ScrollButton onClick={handleScroll}>
             <Image src='/arrow.png' width={20} height={20} />
           </ScrollButton>
-          <ContentContainer>
-            <BlockContent blocks={product.body.pl} serializers={serializers} />
-          </ContentContainer>
-          <Link href={`/producers/${product.producent.slug.current}`}>
-            <LogoAnchor>
-              <Image
-                src={product.producent.logo.asset.url}
-                layout='fixed'
-                width={200}
-                height={200}
-                objectFit='contain'
-              />
-            </LogoAnchor>
-          </Link>
           {product.variants ? (
             <SelectStyled
               value={isSelected}
@@ -464,6 +450,20 @@ const ProductPage = ({ product }) => {
               Wybierz rodzaj produktu
             </AddCartButton>
           )}
+          <ContentContainer>
+            <BlockContent blocks={product.body.pl} serializers={serializers} />
+          </ContentContainer>
+          <Link href={`/producers/${product.producent.slug.current}`}>
+            <LogoAnchor>
+              <Image
+                src={product.producent.logo.asset.url}
+                layout='fixed'
+                width={200}
+                height={200}
+                objectFit='contain'
+              />
+            </LogoAnchor>
+          </Link>
         </AboutContainer>
       </Container>
     </Layout>
