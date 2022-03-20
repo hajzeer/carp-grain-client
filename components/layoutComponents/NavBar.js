@@ -220,10 +220,6 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
         <Link href='/rules'>
           <Anchor onClick={handlerIsVisible}>REGULAMIN</Anchor>
         </Link>
-
-        <Link href='/contact'>
-          <Anchor onClick={handlerIsVisible}>KONTAKT</Anchor>
-        </Link>
       </InnerDiv>
     </Container>
   );

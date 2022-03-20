@@ -12,7 +12,6 @@ import { byPriceLowest, byPriceHighest } from "../../functions/helpFunc";
 const Container = styled.div`
   width: 100%;
   height: auto;
-  padding: 15% 0 20% 0;
   background: ${colors.darkGreyHEX};
   display: flex;
   flex-direction: column;
@@ -20,26 +19,38 @@ const Container = styled.div`
 `;
 
 const InnerContainer = styled.div`
-  z-index: ${zIndex.level5};
+  z-index: ${zIndex.level4};
   width: 100%;
-  height: 300px;
+  height: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 100px 0 0 0;
+  padding: 0 0 15% 0;
+`;
+
+const FormStyled = styled.form`
+  z-index: ${zIndex.level7};
+  background: ${colors.darkGreyHEX};
+
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
 `;
 
 const FieldsetStyled = styled.fieldset`
-  z-index: ${zIndex.level7};
-
   border: none;
   width: 100%;
-  height: auto;
-  margin: 0 20px 0 0;
+  height: 60px;
+  margin: 0;
+  padding: 0;
 `;
 
 const SelectButton = styled.button`
   width: 40px;
   height: 40px;
+  outline: none;
   border: none;
   background: transparent;
   transition: all 0.4s;
@@ -61,27 +72,22 @@ const Paragraph = styled.p`
 `;
 
 const ListContainer = styled.div`
-  z-index: ${zIndex.level7};
   width: 100%;
+  padding: 0 0 20px 0;
   height: auto;
   overflow: hidden;
   transition: transform 0.2s ease-out;
   transform: ${(props) => (props.active ? "scaleY(1)" : "scaleY(0)")};
   background: ${colors.darkGreyHEX};
+
   transform-origin: top;
 `;
 
 const LabelStyled = styled.label`
+  width: 100%;
   color: ${colors.ligthGreyHEX};
   font-weight: ${fontWeight.fontWeightMedium};
   text-transform: uppercase;
-`;
-
-const FormStyled = styled.form`
-  width: 100%;
-  height: auto;
-  position: fixed;
-  top: 0;
 `;
 
 const ProducerPage = ({ producer }) => {

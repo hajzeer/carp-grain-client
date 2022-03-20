@@ -85,7 +85,10 @@ const CartItem = ({ item }) => {
       ) : (
         <Paragraph> </Paragraph>
       )}
+      <Paragraph>-</Paragraph>
       <Paragraph>{item.capacity}</Paragraph>
+      <Paragraph>+</Paragraph>
+
       <ParagraphPrice>{isProductFinalPrice.toFixed(2)} zł</ParagraphPrice>
     </Container>
   );

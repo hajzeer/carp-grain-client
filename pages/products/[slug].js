@@ -458,8 +458,8 @@ const ProductPage = ({ product }) => {
               <Image
                 src={product.producent.logo.asset.url}
                 layout='fixed'
-                width={200}
-                height={200}
+                width={300}
+                height={300}
                 objectFit='contain'
               />
             </LogoAnchor>

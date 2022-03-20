@@ -1,9 +1,10 @@
 /** @format */
 
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import Head from "next/head";
 import { colors } from "../utils";
 import Header from "../components/layoutComponents/header";
+import Footer from "../components/layoutComponents/footer";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -31,6 +32,7 @@ const Layout = ({ children }) => {
       <section>
         <Header />
         {children}
+        <Footer />
       </section>
     </>
   );
