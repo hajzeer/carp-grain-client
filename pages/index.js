@@ -49,7 +49,7 @@ const Subject = styled.h2`
   margin: 0 0 0 10px;
 
   @media (min-width: 786px) {
-    font-size: 40px;
+    font-size: 35px;
   }
 `;
 
@@ -70,7 +70,7 @@ const ButtonStyled = styled.button`
   z-index: ${zIndex.level3};
 
   @media (min-width: 786px) {
-    font-size: 25px;
+    font-size: 20px;
     width: 300px;
     margin-left: -150px;
   }

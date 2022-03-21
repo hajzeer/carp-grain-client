@@ -21,11 +21,6 @@ const Container = styled.button`
     width: 230px;
     height: 320px;
   }
-
-  @media (min-width: 1024px) {
-    width: 230px;
-    height: 350px;
-  }
 `;
 
 const Anchor = styled.a`
@@ -45,10 +40,6 @@ const Title = styled.h2`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  @media (min-width: 786px) {
-    font-size: 20px;
-  }
 `;
 const PriceParagraph = styled.p`
   text-transform: uppercase;
@@ -57,9 +48,6 @@ const PriceParagraph = styled.p`
   margin: 0;
   width: 100%;
   justify-self: flex-start;
-  @media (min-width: 786px) {
-    font-size: 20px;
-  }
 `;
 
 const DiscountParagraph = styled.p`
@@ -70,9 +58,6 @@ const DiscountParagraph = styled.p`
   margin: 0;
   width: 100%;
   justify-self: flex-start;
-  @media (min-width: 786px) {
-    font-size: 25px;
-  }
 `;
 
 const ImageContainer = styled.div`
@@ -81,10 +66,6 @@ const ImageContainer = styled.div`
 
   padding: 0;
   display: block;
-
-  @media (min-width: 786px) {
-    width: 100%;
-  }
 `;
 
 const TextContainer = styled.div`

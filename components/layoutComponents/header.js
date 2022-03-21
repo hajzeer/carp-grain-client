@@ -22,7 +22,7 @@ const Container = styled.header`
   background: transparent;
 
   @media (min-width: 786px) {
-    height: 100px;
+    height: 80px;
   }
 `;
 
@@ -41,7 +41,7 @@ const BluredDiv = styled.div`
   z-index: ${zIndex.level7};
 
   @media (min-width: 786px) {
-    height: 100px;
+    height: 80px;
   }
 `;
 
@@ -127,17 +127,10 @@ const CartStock = styled.p`
   font-weight: ${fontWeight.fontWeightBold};
 
   @media (min-width: 786px) {
-    left: 21%;
-    width: 25px;
-    height: 25px;
-    font-size: 20px;
-  }
-
-  @media (min-width: 1024px) {
     left: 21.5%;
-    width: 25px;
-    height: 25px;
-    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
   }
 `;
 

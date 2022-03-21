@@ -50,7 +50,7 @@ const AboutContainer = styled.div`
 
   @media (min-width: 1024px) {
     width: 50%;
-    padding: 0 0 20% 40px;
+    padding: 0 0 50px 40px;
   }
 `;
 

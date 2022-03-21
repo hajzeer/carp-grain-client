@@ -12,7 +12,7 @@ const Anchor = styled.a`
   font-weight: ${fontWeight.fontWeightReagular};
 
   @media (min-width: 786px) {
-    font-size: 40px;
+    font-size: 25px;
   }
 `;
 

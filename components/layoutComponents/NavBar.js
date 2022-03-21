@@ -50,7 +50,7 @@ const Anchor = styled.a`
   cursor: pointer;
 
   @media (min-width: 786px) {
-    font-size: 40px;
+    font-size: 25px;
   }
 `;
 
@@ -65,7 +65,7 @@ const Paragraph = styled.p`
   cursor: pointer;
 
   @media (min-width: 786px) {
-    font-size: 40px;
+    font-size: 25px;
   }
 `;
 
@@ -77,7 +77,7 @@ const ValueContainer = styled.div`
   align-items: flex-start;
 `;
 const InnerValueContainer = styled.div`
-  width: 100%;
+  width: 50%;
   justify-self: flex-start;
   display: flex;
   flex-direction: row;
@@ -100,8 +100,8 @@ const ImageOuterButton = styled.button`
   transform: ${(props) => (props.active ? "rotate(180deg)" : "rotate(0)")};
 
   @media (min-width: 786px) {
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
   }
 `;
 

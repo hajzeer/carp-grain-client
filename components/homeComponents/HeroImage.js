@@ -72,11 +72,6 @@ const ImageDiv = styled.div`
   display: block;
   width: 200px;
   height: 200px;
-
-  @media (min-width: 786px) {
-    width: 300px;
-    height: 300px;
-  }
 `;
 
 const ImageStyled = styled(Image)`
