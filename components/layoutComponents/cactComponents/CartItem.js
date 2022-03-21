@@ -85,6 +85,16 @@ const ImageStyled = styled(Image)`
   margin: 0;
 `;
 
+const QuantityButtons = styled.button`
+  width: 25px;
+  height: 25px;
+  color: ${colors.ligthGreyHEX};
+  background: transparent;
+  outline: none;
+  border: none;
+  font-size: 20px;
+`;
+
 const CartItem = ({ item }) => {
   const { cart, setCart } = useContext(CartContext);
   const [isProductFinalPrice, setIsProductFinalPrice] = useState(0);
@@ -141,9 +151,9 @@ const CartItem = ({ item }) => {
         <Paragraph> </Paragraph>
       )}
       <div>
-        <button onClick={handleAddCapacity}>+</button>
+        <QuantityButtons onClick={handleAddCapacity}>+</QuantityButtons>
         <Paragraph>{item.capacity}</Paragraph>
-        <button onClick={handleDeleteCapacity}>-</button>
+        <QuantityButtons onClick={handleDeleteCapacity}>-</QuantityButtons>
       </div>
 
       <ParagraphPrice>{isProductFinalPrice.toFixed(2)} zł</ParagraphPrice>
