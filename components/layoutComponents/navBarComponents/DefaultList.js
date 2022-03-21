@@ -10,6 +10,10 @@ const Anchor = styled.a`
   text-transform: uppercase;
   font-size: 20px;
   font-weight: ${fontWeight.fontWeightReagular};
+
+  @media (min-width: 786px) {
+    font-size: 40px;
+  }
 `;
 
 const DefaultList = ({ items, path, handleClose }) => {

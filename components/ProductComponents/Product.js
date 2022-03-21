@@ -16,6 +16,16 @@ const Container = styled.button`
   background: transparent;
   border: none;
   font-family: "Prompt", sans-serif;
+
+  @media (min-width: 786px) {
+    width: 230px;
+    height: 320px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 230px;
+    height: 350px;
+  }
 `;
 
 const Anchor = styled.a`
@@ -35,6 +45,10 @@ const Title = styled.h2`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (min-width: 786px) {
+    font-size: 20px;
+  }
 `;
 const PriceParagraph = styled.p`
   text-transform: uppercase;
@@ -43,6 +57,9 @@ const PriceParagraph = styled.p`
   margin: 0;
   width: 100%;
   justify-self: flex-start;
+  @media (min-width: 786px) {
+    font-size: 20px;
+  }
 `;
 
 const DiscountParagraph = styled.p`
@@ -53,6 +70,9 @@ const DiscountParagraph = styled.p`
   margin: 0;
   width: 100%;
   justify-self: flex-start;
+  @media (min-width: 786px) {
+    font-size: 25px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -61,6 +81,10 @@ const ImageContainer = styled.div`
 
   padding: 0;
   display: block;
+
+  @media (min-width: 786px) {
+    width: 100%;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -76,7 +100,6 @@ const TextContainer = styled.div`
 
 const TitleContainer = styled.div`
   width: 100%;
-  height: 20%;
   padding: 0;
   margin: 0;
   display: flex;
@@ -94,8 +117,8 @@ const Products = ({ item, value }) => {
             <Image
               src={item.images[0].asset.url}
               layout='responsive'
-              width='150px'
-              height='150px'
+              width='200px'
+              height='200px'
               objectFit='cover'
             />
           </ImageContainer>

@@ -47,6 +47,11 @@ const Anchor = styled.a`
   margin: 15px 15px;
   text-decoration: none;
   z-index: ${zIndex.level9};
+  cursor: pointer;
+
+  @media (min-width: 786px) {
+    font-size: 40px;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -57,6 +62,11 @@ const Paragraph = styled.p`
   margin: 15px 15px;
   text-decoration: none;
   z-index: ${zIndex.level9};
+  cursor: pointer;
+
+  @media (min-width: 786px) {
+    font-size: 40px;
+  }
 `;
 
 const ValueContainer = styled.div`
@@ -76,15 +86,23 @@ const InnerValueContainer = styled.div`
 `;
 
 const ImageOuterButton = styled.button`
+  display: block;
   width: 40px;
   height: 40px;
   margin: 0 25% 0 0;
   outline: none;
   border: none;
+  cursor: pointer;
+
   background: transparent;
   transition: all 0.4s;
 
   transform: ${(props) => (props.active ? "rotate(180deg)" : "rotate(0)")};
+
+  @media (min-width: 786px) {
+    width: 45px;
+    height: 45px;
+  }
 `;
 
 const ListContainer = styled.div`
@@ -97,6 +115,7 @@ const ListContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   transform-origin: top;
+  cursor: pointer;
 `;
 
 const NavBar = ({ isVisible, handlerIsVisible }) => {
@@ -186,7 +205,12 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
             <ImageOuterButton
               active={isActive.first}
               onClick={() => setIsActive({ first: !isActive.first })}>
-              <Image src='/arrow.png' width={20} height={20} />
+              <Image
+                src='/arrow.png'
+                width={60}
+                height={60}
+                layout='responsive'
+              />
             </ImageOuterButton>
           </InnerValueContainer>
           <ListContainer active={isActive.first}>
@@ -206,7 +230,12 @@ const NavBar = ({ isVisible, handlerIsVisible }) => {
             <ImageOuterButton
               active={isActive.second}
               onClick={() => setIsActive({ second: !isActive.second })}>
-              <Image src='/arrow.png' width={20} height={20} />
+              <Image
+                src='/arrow.png'
+                width={60}
+                height={60}
+                layout='responsive'
+              />
             </ImageOuterButton>
           </InnerValueContainer>
           <ListContainer active={isActive.second}>

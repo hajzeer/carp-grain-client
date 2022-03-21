@@ -26,6 +26,10 @@ const Paragraph = styled.p`
   font-size: 12px;
 
   margin: 0;
+
+  @media (min-width: 786px) {
+    font-size: 18px;
+  }
 `;
 const ParagraphPrice = styled.p`
   width: 100px;
@@ -33,6 +37,9 @@ const ParagraphPrice = styled.p`
   font-size: 12px;
 
   margin: 0;
+  @media (min-width: 786px) {
+    font-size: 18px;
+  }
 `;
 
 const ParagraphTitle = styled.p`
@@ -40,6 +47,9 @@ const ParagraphTitle = styled.p`
   color: ${colors.ligthGreyHEX};
   font-size: 12px;
   margin: 0;
+  @media (min-width: 786px) {
+    font-size: 18px;
+  }
 `;
 
 const RemoveButton = styled.button`
@@ -52,6 +62,22 @@ const RemoveButton = styled.button`
   font-size: 12px;
   color: ${colors.ligthGreyHEX};
   cursor: pointer;
+
+  @media (min-width: 786px) {
+    font-size: 18px;
+  }
+`;
+
+const ImageDiv = styled.div`
+  display: block;
+
+  width: 50px;
+  height: 50px;
+
+  @media (min-width: 786px) {
+    width: 70px;
+    height: 70px;
+  }
 `;
 
 const ImageStyled = styled(Image)`
@@ -70,6 +96,29 @@ const CartItem = ({ item }) => {
     );
   };
 
+  const handleAddCapacity = () => {
+    const index = cart.indexOf(item);
+    setCart((currentState) => {
+      currentState[index].capacity++;
+      return [...currentState];
+    });
+  };
+
+  const handleDeleteCapacity = () => {
+    const index = cart.indexOf(item);
+    if (item.capacity > 1) {
+      setCart((currentState) => {
+        currentState[index].capacity--;
+        return [...currentState];
+      });
+    } else if (item.capacity == 1) {
+      setCart((currentState) => {
+        currentState.splice(index, 1);
+        return [...currentState];
+      });
+    }
+  };
+
   useEffect(() => {
     setIsProductFinalPrice(item.capacity * item.price);
   });
@@ -77,17 +126,25 @@ const CartItem = ({ item }) => {
   return (
     <Container>
       <RemoveButton onClick={() => removeItem(item)}>X</RemoveButton>
-      <ImageStyled src={item.Images} width={50} height={50} />
-
+      <ImageDiv>
+        <ImageStyled
+          src={item.Images}
+          width={80}
+          height={80}
+          layout='responsive'
+        />
+      </ImageDiv>
       <ParagraphTitle>{item.title}</ParagraphTitle>
       {item.variant != null ? (
         <Paragraph>{item.variant}</Paragraph>
       ) : (
         <Paragraph> </Paragraph>
       )}
-      <Paragraph>-</Paragraph>
-      <Paragraph>{item.capacity}</Paragraph>
-      <Paragraph>+</Paragraph>
+      <div>
+        <button onClick={handleAddCapacity}>+</button>
+        <Paragraph>{item.capacity}</Paragraph>
+        <button onClick={handleDeleteCapacity}>-</button>
+      </div>
 
       <ParagraphPrice>{isProductFinalPrice.toFixed(2)} zł</ParagraphPrice>
     </Container>

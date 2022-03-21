@@ -38,17 +38,28 @@ const InnerContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (min-width: 786px) {
+    height: 320px;
+  }
 `;
 const Subject = styled.h2`
   color: ${colors.ligthGreyHEX};
   font-size: 25px;
   margin: 0 0 0 10px;
+
+  @media (min-width: 786px) {
+    font-size: 40px;
+  }
 `;
 
 const ButtonStyled = styled.button`
   position: absolute;
   bottom: 20%;
-  left: 25%;
+  left: 50%;
+  margin-left: -50px;
+  margin-left: -100px;
+
   width: 200px;
   height: 50px;
   border: none;
@@ -57,6 +68,12 @@ const ButtonStyled = styled.button`
   color: ${colors.defaultWhiteHEX};
   cursor: pointer;
   z-index: ${zIndex.level3};
+
+  @media (min-width: 786px) {
+    font-size: 25px;
+    width: 300px;
+    margin-left: -150px;
+  }
 `;
 
 const Anchor = styled.a`

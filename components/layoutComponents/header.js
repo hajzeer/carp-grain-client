@@ -20,6 +20,10 @@ const Container = styled.header`
   z-index: ${zIndex.level9};
 
   background: transparent;
+
+  @media (min-width: 786px) {
+    height: 100px;
+  }
 `;
 
 const BluredDiv = styled.div`
@@ -35,6 +39,10 @@ const BluredDiv = styled.div`
   margin: 0;
   padding: 0;
   z-index: ${zIndex.level7};
+
+  @media (min-width: 786px) {
+    height: 100px;
+  }
 `;
 
 const InnerContainer = styled.div`
@@ -46,6 +54,30 @@ const InnerContainer = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+`;
+
+const ImageDiv = styled.div`
+  display: block;
+  width: 30px;
+  height: 30px;
+  z-index: ${zIndex.level8};
+
+  @media (min-width: 786px) {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
+const LogoDiv = styled.div`
+  display: block;
+
+  width: 50px;
+  height: 50px;
+
+  @media (min-width: 786px) {
+    width: 70px;
+    height: 70px;
+  }
 `;
 
 const ImageStyled = styled(Image)`
@@ -87,12 +119,26 @@ const CartStock = styled.p`
   width: 15px;
   height: 15px;
   bottom: 25px;
-  left: 80px;
+  left: 21%;
   background: ${colors.ligthGreyHEX};
   border-radius: 100%;
   color: ${colors.defaultBlackHEX};
   z-index: ${zIndex.level9};
   font-weight: ${fontWeight.fontWeightBold};
+
+  @media (min-width: 786px) {
+    left: 21%;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    left: 21.5%;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+  }
 `;
 
 const Header = () => {
@@ -164,11 +210,27 @@ const Header = () => {
         <ButtonContainer>
           <ButtonStyled onClick={handleCart}>
             <CartStock>{cart.length}</CartStock>
-            <ImageStyled src='/cart.svg' width='30' height='30' quality='100' />
+            <ImageDiv>
+              <ImageStyled
+                src='/cart.svg'
+                width='50'
+                height='50'
+                quality='100'
+                layout='responsive'
+              />
+            </ImageDiv>
           </ButtonStyled>
         </ButtonContainer>
         <Link href='/'>
-          <ImageStyled src='/logo.png' width='50' height='50' quality='100' />
+          <LogoDiv>
+            <ImageStyled
+              src='/logo.png'
+              width='70'
+              height='70'
+              quality='100'
+              layout='responsive'
+            />
+          </LogoDiv>
         </Link>
         <ButtonContainer>
           <Hamburger isVisible={isVisible} handlerIsVisible={handleHamburger} />

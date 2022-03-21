@@ -26,6 +26,10 @@ const ContainerFooter = styled.footer`
     color: #f1f1f1;
     text-decoration: none;
   }
+
+  @media (min-width: 786px) {
+    font-size: 20px;
+  }
 `;
 
 const Footer = () => {

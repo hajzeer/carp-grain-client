@@ -19,12 +19,22 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 `;
 
 const HelperContainer = styled.div`
   width: 100%;
   height: 55vh;
   background: transparent;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+    height: 100vh;
+  }
 `;
 
 const AboutContainer = styled.div`
@@ -37,6 +47,11 @@ const AboutContainer = styled.div`
   background: ${colors.darkGreyHEX};
   z-index: ${zIndex.level7};
   padding: 0 0 20% 0;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+    padding: 0 0 20% 40px;
+  }
 `;
 
 const Subject = styled.h1`
@@ -175,6 +190,19 @@ const ImageDiv = styled.div`
   position: fixed;
   width: 100%;
   height: 60vh;
+
+  @media (min-width: 1024px) {
+    position: relative;
+    width: 95%;
+    height: 70vh;
+    top: 10%;
+    margin: 20px;
+    span {
+      img {
+        border-radius: 25px;
+      }
+    }
+  }
 `;
 
 const ScrollButton = styled.button`
@@ -186,6 +214,10 @@ const ScrollButton = styled.button`
   top: 65%;
   right: 20px;
   transform: rotate(180deg);
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
 `;
 
 const ArrowButtonPrev = styled.button`
@@ -215,6 +247,10 @@ const ArrowButtonPrev = styled.button`
   &:active {
     transform: translateX(-5px);
   }
+
+  @media (min-width: 1024px) {
+    top: 45%;
+  }
 `;
 const ArrowButtonNext = styled.button`
   position: absolute;
@@ -241,6 +277,10 @@ const ArrowButtonNext = styled.button`
   }
   &:active {
     transform: translateX(5px);
+  }
+
+  @media (min-width: 1024px) {
+    top: 45%;
   }
 `;
 

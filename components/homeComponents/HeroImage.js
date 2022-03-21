@@ -69,9 +69,14 @@ const fadeOut = keyframes`
 
 const ImageDiv = styled.div`
   justify-self: flex-start;
+  display: block;
+  width: 200px;
+  height: 200px;
 
-  width: 250px;
-  height: 250px;
+  @media (min-width: 786px) {
+    width: 300px;
+    height: 300px;
+  }
 `;
 
 const ImageStyled = styled(Image)`
@@ -138,9 +143,9 @@ const HeroImage = () => {
         <ImageDiv>
           <ImageStyled
             src='/transparent_light_logo.png'
-            layout='fixed'
-            width={250}
-            height={250}
+            layout='responsive'
+            width={300}
+            height={300}
           />
         </ImageDiv>
         <Subject>carp grain shop</Subject>

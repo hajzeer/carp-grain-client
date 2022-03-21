@@ -26,6 +26,14 @@ const InnerContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   margin: 100px 0 0 0;
   padding: 0 0 15% 0;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media (min-width: 1250px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
 `;
 
 const FormStyled = styled.form`
@@ -54,6 +62,7 @@ const SelectButton = styled.button`
   border: none;
   background: transparent;
   transition: all 0.4s;
+  cursor: pointer;
 
   transform: ${(props) => (props.active ? "rotate(180deg)" : "rotate(0)")};
 `;
@@ -79,6 +88,7 @@ const ListContainer = styled.div`
   transition: transform 0.2s ease-out;
   transform: ${(props) => (props.active ? "scaleY(1)" : "scaleY(0)")};
   background: ${colors.darkGreyHEX};
+  cursor: pointer;
 
   transform-origin: top;
 `;
@@ -88,8 +98,8 @@ const LabelStyled = styled.label`
   color: ${colors.ligthGreyHEX};
   font-weight: ${fontWeight.fontWeightMedium};
   text-transform: uppercase;
+  cursor: pointer;
 `;
-
 const CategoryPage = ({ category }) => {
   const [isActive, setIsActive] = useState(false);
   const [isChecked, setIsChecked] = useState({
