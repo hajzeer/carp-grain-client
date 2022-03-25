@@ -31,6 +31,10 @@ const InnerContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+
+  @media (min-width: 1024px) {
+    margin: 10% 0 0 0;
+  }
 `;
 
 const BackgroundImageStyled = styled(Image)`

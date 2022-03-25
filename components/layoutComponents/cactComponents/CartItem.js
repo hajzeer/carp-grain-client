@@ -85,6 +85,14 @@ const ImageStyled = styled(Image)`
   margin: 0;
 `;
 
+const QuanityDiv = styled.div`
+  width: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const QuantityButtons = styled.button`
   width: 25px;
   height: 25px;
@@ -93,6 +101,7 @@ const QuantityButtons = styled.button`
   outline: none;
   border: none;
   font-size: 20px;
+  cursor: pointer;
 `;
 
 const CartItem = ({ item }) => {
@@ -150,11 +159,11 @@ const CartItem = ({ item }) => {
       ) : (
         <Paragraph> </Paragraph>
       )}
-      <div>
+      <QuanityDiv>
         <QuantityButtons onClick={handleAddCapacity}>+</QuantityButtons>
         <Paragraph>{item.capacity}</Paragraph>
         <QuantityButtons onClick={handleDeleteCapacity}>-</QuantityButtons>
-      </div>
+      </QuanityDiv>
 
       <ParagraphPrice>{isProductFinalPrice.toFixed(2)} zł</ParagraphPrice>
     </Container>

@@ -77,19 +77,23 @@ const ValueContainer = styled.div`
   align-items: flex-start;
 `;
 const InnerValueContainer = styled.div`
-  width: 50%;
+  width: 70%;
   justify-self: flex-start;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  @media (min-width: 786px) {
+    width: 30%;
+  }
 `;
 
 const ImageOuterButton = styled.button`
   display: block;
-  width: 40px;
-  height: 40px;
-  margin: 0 25% 0 0;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 0;
   outline: none;
   border: none;
   cursor: pointer;
