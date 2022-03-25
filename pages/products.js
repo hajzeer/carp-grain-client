@@ -30,6 +30,8 @@ const InnerContainer = styled.div`
 
   @media (min-width: 1024px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 80%;
+    justify-content: center;
   }
 
   @media (min-width: 1250px) {
