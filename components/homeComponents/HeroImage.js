@@ -147,7 +147,7 @@ const HeroImage = () => {
             height={300}
           />
         </ImageDiv>
-        <Subject>carp grain shop</Subject>
+        <Subject>carp grains shop</Subject>
       </InnerContainer>
     </Container>
   );
