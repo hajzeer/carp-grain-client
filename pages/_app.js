@@ -1,6 +1,6 @@
 /** @format */
 
-import { CartProvider } from "../context/cartContext";
+import { CartProvider } from '../context/cartContext';
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,10 +1,10 @@
 /** @format */
 
-import styled from "styled-components";
-import Image from "next/image";
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../../../context/cartContext";
-import { colors } from "../../../utils";
+import styled from 'styled-components';
+import Image from 'next/image';
+import { useContext, useEffect, useState } from 'react';
+import { CartContext } from '../../../context/cartContext';
+import { colors } from '../../../utils';
 
 const Container = styled.div`
   width: 96%;
@@ -21,7 +21,13 @@ const Container = styled.div`
 `;
 
 const Paragraph = styled.p`
-  width: 50px;
+  padding: 3px;
+  width: 40px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: ${colors.ligthGreyHEX};
   font-size: 12px;
 
@@ -44,6 +50,12 @@ const ParagraphPrice = styled.p`
 
 const ParagraphTitle = styled.p`
   width: 200px;
+  height: 80px;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: ${colors.ligthGreyHEX};
   font-size: 12px;
   margin: 0;
@@ -53,10 +65,14 @@ const ParagraphTitle = styled.p`
 `;
 
 const RemoveButton = styled.button`
-  width: 35px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
   margin: 5px;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
   font-size: 12px;
@@ -72,7 +88,7 @@ const ImageDiv = styled.div`
   display: block;
 
   width: 50px;
-  height: 50px;
+  height: 40px;
 
   @media (min-width: 786px) {
     width: 70px;
@@ -86,7 +102,8 @@ const ImageStyled = styled(Image)`
 `;
 
 const QuanityDiv = styled.div`
-  width: 25px;
+  width: 60px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,13 +111,13 @@ const QuanityDiv = styled.div`
 `;
 
 const QuantityButtons = styled.button`
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   color: ${colors.ligthGreyHEX};
   background: transparent;
   outline: none;
   border: none;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
 `;
 
@@ -118,19 +135,19 @@ const CartItem = ({ item }) => {
   const handleAddCapacity = () => {
     const index = cart.indexOf(item);
     setCart((currentState) => {
-      currentState[index].capacity++;
+      currentState[index].quantity++;
       return [...currentState];
     });
   };
 
   const handleDeleteCapacity = () => {
     const index = cart.indexOf(item);
-    if (item.capacity > 1) {
+    if (item.quantity > 1) {
       setCart((currentState) => {
-        currentState[index].capacity--;
+        currentState[index].quantity--;
         return [...currentState];
       });
-    } else if (item.capacity == 1) {
+    } else if (item.quantity == 1) {
       setCart((currentState) => {
         currentState.splice(index, 1);
         return [...currentState];
@@ -139,7 +156,7 @@ const CartItem = ({ item }) => {
   };
 
   useEffect(() => {
-    setIsProductFinalPrice(item.capacity * item.price);
+    setIsProductFinalPrice(item.quantity * item.price);
   });
 
   return (
@@ -147,13 +164,13 @@ const CartItem = ({ item }) => {
       <RemoveButton onClick={() => removeItem(item)}>X</RemoveButton>
       <ImageDiv>
         <ImageStyled
-          src={item.Images}
+          src={item.images}
           width={80}
           height={80}
-          layout='responsive'
+          layout="responsive"
         />
       </ImageDiv>
-      <ParagraphTitle>{item.title}</ParagraphTitle>
+      <ParagraphTitle>{item.name}</ParagraphTitle>
       {item.variant != null ? (
         <Paragraph>{item.variant}</Paragraph>
       ) : (
@@ -161,7 +178,7 @@ const CartItem = ({ item }) => {
       )}
       <QuanityDiv>
         <QuantityButtons onClick={handleAddCapacity}>+</QuantityButtons>
-        <Paragraph>{item.capacity}</Paragraph>
+        <Paragraph>{item.quantity}</Paragraph>
         <QuantityButtons onClick={handleDeleteCapacity}>-</QuantityButtons>
       </QuanityDiv>
 

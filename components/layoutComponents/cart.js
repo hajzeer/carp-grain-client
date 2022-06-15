@@ -1,14 +1,15 @@
 /** @format */
 
-import { useRef, useEffect, useContext, useState } from "react";
-import Link from "next/link";
-import styled from "styled-components";
-import { colors, zIndex, fontSize, fontWeight } from "../../utils";
-import gsap from "gsap";
-import CartItemList from "./cactComponents/CartItemList";
-import { CartContext } from "../../context/cartContext";
+import { useRef, useEffect, useContext, useState } from 'react';
+import { fetchPostJSON } from '../../utils/apiHelpers';
+import styled from 'styled-components';
+import { colors, zIndex, fontSize, fontWeight } from '../../utils';
+import gsap from 'gsap';
+import CartItemList from './cartComponents/CartItemList';
+import { CartContext } from '../../context/cartContext';
+import { getStripe } from '../../utils/stripe/getStripe';
 
-const Container = styled.section`
+const Container = styled.div`
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -62,7 +63,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     border: 2px solid ${colors.ligthGreyHEX};
     bottom: 0;
@@ -87,26 +88,39 @@ const Cart = ({ isVisible }) => {
   const [isFinalPrice, setIsFinalPrice] = useState(0);
 
   const { cart } = useContext(CartContext);
+  const handleCheckout = async (e) => {
+    e.preventDefault();
 
+    //send the cart data to our serverless API
+    const response = await fetchPostJSON('/api/checkout_sessions/cart', cart);
+
+    if (response.statusCode === 500) {
+      console.error(response.message);
+      return;
+    }
+    const stripe = getStripe();
+    //if nothing went wrong, sends user to Stripe checkout
+    stripe.redirectToCheckout({ sessionId: response.id });
+  };
   useEffect(() => {
     if (isVisible.clicked === true) {
       NavBarHelperTween.current = gsap.to(NavBarHelper.current, {
         duration: 0.5,
         xPercent: 100,
-        ease: "Power4.easeOut",
+        ease: 'Power4.easeOut',
         delay: 0.3,
       });
       NavBarRefTween.current = gsap.to(NavBarRef.current, {
         duration: 1,
         xPercent: 100,
-        ease: "Power4.easeOut",
+        ease: 'Power4.easeOut',
         delay: 0.4,
       });
     } else if (isVisible.clicked === false) {
       NavBarRefTween.current = gsap.to(NavBarRef.current, {
         duration: 1,
         xPercent: -100,
-        ease: "Power4.easeOut",
+        ease: 'Power4.easeOut',
       });
     }
   }, [isVisible]);
@@ -114,7 +128,7 @@ const Cart = ({ isVisible }) => {
   useEffect(() => {
     let total = 0;
     for (let el in cart) {
-      total += cart[el].price * cart[el].capacity;
+      total += cart[el].price * cart[el].quantity;
       const value = parseFloat(total.toFixed(2));
       setIsFinalPrice(value);
     }

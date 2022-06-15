@@ -1,17 +1,17 @@
 /** @format */
 
-import { useState, useRef, useContext, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import Image from "next/image";
-import Link from "next/link";
-import Layout from "../../layout/Layout";
-import SanityClient from "../../utils/client";
-import { colors, fontSize, fontWeight, zIndex } from "../../utils";
-import BlockContent from "@sanity/block-content-to-react";
-import YouTube from "react-youtube";
-import getYouTubeId from "get-youtube-id";
-import { useSwipeable } from "react-swipeable";
-import { CartContext } from "../../context/cartContext";
+import { useState, useRef, useContext, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
+import Image from 'next/image';
+import Link from 'next/link';
+import Layout from '../../layout/Layout';
+import SanityClient from '../../utils/client';
+import { colors, fontSize, fontWeight, zIndex } from '../../utils';
+import BlockContent from '@sanity/block-content-to-react';
+import YouTube from 'react-youtube';
+import getYouTubeId from 'get-youtube-id';
+import { useSwipeable } from 'react-swipeable';
+import { CartContext } from '../../context/cartContext';
 
 const Container = styled.div`
   width: 100%;
@@ -65,7 +65,7 @@ const Subject = styled.h1`
 
 const PriceSubject = styled.h2`
   width: 80%;
-  color: ${(props) => (props.discount ? "#FF2727" : `${colors.ligthGreyHEX}`)};
+  color: ${(props) => (props.discount ? '#FF2727' : `${colors.ligthGreyHEX}`)};
   margin: 15px 0 0 0;
   font-size: ${(props) => (props.discount ? `40px` : `${fontSize.bigFont}`)};
   padding: 0;
@@ -126,7 +126,7 @@ const AddCartButton = styled.button`
   cursor: pointer;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     border: 2px solid ${colors.ligthGreyHEX};
     bottom: 0;
@@ -161,7 +161,7 @@ const BackgroundImageStyled = styled(Image)`
   z-index: ${zIndex.levelMinus1};
   object-fit: cover;
   object-position: 70%;
-  visibility: ${(props) => (props.active ? "visible" : "hidden")};
+  visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
   animation: ${(props) => (props.active ? fadeIn : fadeOut)} 0.2s linear;
 `;
 
@@ -233,7 +233,7 @@ const ArrowButtonPrev = styled.button`
   cursor: pointer;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     height: 100%;
@@ -265,7 +265,7 @@ const ArrowButtonNext = styled.button`
   cursor: pointer;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     height: 100%;
@@ -345,12 +345,12 @@ const ProductPage = ({ product }) => {
   };
 
   const handleScroll = () => {
-    const el = document.getElementById("paragraph");
+    const el = document.getElementById('paragraph');
 
     el.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "nearest",
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'nearest',
     });
   };
 
@@ -387,10 +387,10 @@ const ProductPage = ({ product }) => {
     const productAdded = {
       id: product._id,
       key: variantKey,
-      title: product.title,
+      name: product.title,
       variant: variantTitle,
-      Images: product.defaultProductVariant.images[0].asset.url,
-      capacity: value,
+      images: product.defaultProductVariant.images[0].asset.url,
+      quantity: value,
       price: value * productPrice,
     };
     const exist = cart.find((x) => x.key === productAdded.key);
@@ -398,7 +398,7 @@ const ProductPage = ({ product }) => {
       setCart(
         cart.map((x) =>
           x.key === productAdded.key
-            ? { ...exist, capacity: exist.capacity + 1 }
+            ? { ...exist, quantity: exist.quantity + 1 }
             : x
         )
       );
@@ -416,10 +416,10 @@ const ProductPage = ({ product }) => {
         <HelperContainer>
           <ImageDiv ref={refPassthrough}>
             <ArrowButtonPrev onClick={prevSlide}>
-              <Image src='/arrow-left.png' width={30} height={30} />
+              <Image src="/arrow-left.png" width={30} height={30} />
             </ArrowButtonPrev>
             <ArrowButtonNext onClick={nextSlide}>
-              <Image src='/arrow-right.png' width={30} height={30} />
+              <Image src="/arrow-right.png" width={30} height={30} />
             </ArrowButtonNext>
             {product.defaultProductVariant.images.map((image, index) => {
               return (
@@ -428,7 +428,7 @@ const ProductPage = ({ product }) => {
                     <BackgroundImageStyled
                       src={image.asset.url}
                       active={current === index}
-                      layout='fill'
+                      layout="fill"
                     />
                   )}
                 </>
@@ -458,20 +458,20 @@ const ProductPage = ({ product }) => {
           ) : null}
 
           <ScrollButton onClick={handleScroll}>
-            <Image src='/arrow.png' width={20} height={20} />
+            <Image src="/arrow.png" width={20} height={20} />
           </ScrollButton>
           {product.variants ? (
             <SelectStyled
               value={isSelected}
               onChange={(e) => setIsSelected([e.target.value])}>
-              <option value='none' selected disabled hidden>
+              <option value="none" selected disabled hidden>
                 --- select variant ---
               </option>
 
               {product.variants.map((item) => {
                 return (
                   <option key={item._id} value={JSON.stringify(item)}>
-                    {item.title},{" "}
+                    {item.title},{' '}
                     {item.discount
                       ? item.discount.toFixed(2)
                       : item.price.toFixed(2)}
@@ -482,25 +482,32 @@ const ProductPage = ({ product }) => {
             </SelectStyled>
           ) : null}
           {isParsed != null || !product.variants ? (
-            <AddCartButton onClick={handleAdd} id='paragraph'>
+            <AddCartButton onClick={handleAdd} id="paragraph">
               Dodaj do koszyka
             </AddCartButton>
           ) : (
-            <AddCartButton id='paragraph'>
+            <AddCartButton id="paragraph">
               Wybierz rodzaj produktu
             </AddCartButton>
           )}
           <ContentContainer>
-            <BlockContent blocks={product.body.pl} serializers={serializers} />
+            <BlockContent
+              blocks={product.body.pl}
+              serializers={serializers}
+              imageOptions={{
+                width: 200,
+                height: 200,
+              }}
+            />
           </ContentContainer>
           <Link href={`/producers/${product.producent.slug.current}`}>
             <LogoAnchor>
               <Image
                 src={product.producent.logo.asset.url}
-                layout='fixed'
+                layout="fixed"
                 width={300}
                 height={300}
-                objectFit='contain'
+                objectFit="contain"
               />
             </LogoAnchor>
           </Link>
@@ -517,11 +524,11 @@ export async function getStaticPaths() {
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: "blocking",
+    fallback: 'blocking',
   };
 }
 export async function getStaticProps(context) {
-  const { slug = "" } = context.params;
+  const { slug = '' } = context.params;
   const product = await SanityClient.fetch(
     `
       *[_type == "product" && slug.current == $slug][0] {
