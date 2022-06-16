@@ -357,9 +357,9 @@ const ProductPage = ({ product }) => {
   const handleAdd = () => {
     let value = 1;
 
-    const productPrice = 0;
-    const variantTitle = null;
-    const variantKey = null;
+    let productPrice = 0;
+    let variantTitle = null;
+    let variantKey = null;
     if (isSelected != null) {
       productPrice = isParsed.price;
     } else {
@@ -524,7 +524,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: 'blocking',
+    fallback: true,
   };
 }
 export async function getStaticProps(context) {

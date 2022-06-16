@@ -8,6 +8,7 @@ import gsap from 'gsap';
 import CartItemList from './cartComponents/CartItemList';
 import { CartContext } from '../../context/cartContext';
 import { getStripe } from '../../utils/stripe/getStripe';
+import {loadStripe} from "@stripe/stripe-js";
 
 const Container = styled.div`
   position: fixed;
@@ -93,14 +94,13 @@ const Cart = ({ isVisible }) => {
 
     //send the cart data to our serverless API
     const response = await fetchPostJSON('/api/checkout_sessions/cart', cart);
-
     if (response.statusCode === 500) {
       console.error(response.message);
       return;
     }
-    const stripe = getStripe();
+    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
     //if nothing went wrong, sends user to Stripe checkout
-    stripe.redirectToCheckout({ sessionId: response.id });
+    await stripe.redirectToCheckout({sessionId: response.id});
   };
   useEffect(() => {
     if (isVisible.clicked === true) {
@@ -144,7 +144,9 @@ const Cart = ({ isVisible }) => {
           <Paragraph>wartość koszyka: 0,00 zł</Paragraph>
         )}
 
-        <SubmitButton>PRZEJDŹ DO PŁATNOŚCI</SubmitButton>
+        <SubmitButton onClick={handleCheckout}>
+          PRZEJDŹ DO PŁATNOŚCI
+        </SubmitButton>
       </FinalContainer>
     </Container>
   );
