@@ -171,8 +171,9 @@ export async function getStaticPaths() {
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
+    fallback: "blocking",
   };
+
 }
 export async function getStaticProps(context) {
   const { slug = "" } = context.params;
