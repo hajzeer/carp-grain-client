@@ -200,6 +200,7 @@ export async function getStaticProps(context) {
     props: {
       producer,
     },
+    revalidate: 10,
   };
 }
 
