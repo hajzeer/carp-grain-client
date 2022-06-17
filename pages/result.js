@@ -3,6 +3,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import PrintObject from "../components/layoutComponents/PrintObject";
 import { fetchGetJSON } from "../utils/apiHelpers";
+import Layout from "../layout/Layout";
 
 const ResultPage = () => {
     const router = useRouter();
@@ -20,6 +21,7 @@ const ResultPage = () => {
     }
 
     return (
+        <Layout>
         <div className="page-container">
             Congrats
             <h1>Checkout Payment Result</h1>
@@ -29,21 +31,20 @@ const ResultPage = () => {
             </p>
             <p>For example:</p>
             <hr />
-            <h3>
-                Thank you, {data?.payment_intent.charges.data[0].billing_details.name}.
-            </h3>
-            <p>
-                Confirmation email sent to{" "}
-                {data?.payment_intent.charges.data[0].billing_details.email}.
-            </p>
+            {/*<h3>*/}
+            {/*    Thank you, {data?.payment_intent.charges.data[0].billing_details.name}.*/}
+            {/*</h3>*/}
+            {/*<p>*/}
+            {/*    Confirmation email sent to{" "}*/}
+            {/*    {data?.payment_intent.charges.data[0].billing_details.email}.*/}
+            {/*</p>*/}
             <hr />
-            <h2>Status: {data?.payment_intent?.status ?? "loading..."}</h2>
-            <h3>CheckoutSession response:</h3>
-            <PrintObject content={data ?? "loading..."} />
+
             <Link href="/">
                 <a>Back home</a>
             </Link>
         </div>
+        </Layout>
     );
 };
 

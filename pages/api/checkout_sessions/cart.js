@@ -40,6 +40,30 @@ export default async function handler(req, res) {
         shipping_address_collection: {
           allowed_countries: ['PL'],
         },
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: {
+                amount: 1500,
+                currency: 'pln',
+              },
+              display_name: 'Przedpłata',
+            },
+          },
+          { shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: {
+                amount: 2500,
+                currency: 'pln',
+              },
+              display_name: 'Za pobraniem',
+            },}
+        ],
+
+        phone_number_collection: {
+          enabled: true,
+        },
         line_items: cartItems,
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}`,
