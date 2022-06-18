@@ -13,7 +13,6 @@ export default async function handler(req, res) {
         const checkout_session = await stripe.checkout.sessions.retrieve(id, {
             expand: ["payment_intent"],
         });
-
         res.status(200).json(checkout_session);
     } catch (err) {
         res.status(500).json({ statusCode: 500, message: err.message });
