@@ -48,17 +48,9 @@ export default async function handler(req, res) {
                 amount: 1500,
                 currency: 'pln',
               },
-              display_name: 'Przedpłata',
+              display_name: 'Koszt dostawy',
             },
-          },
-          { shipping_rate_data: {
-              type: 'fixed_amount',
-              fixed_amount: {
-                amount: 2500,
-                currency: 'pln',
-              },
-              display_name: 'Za pobraniem',
-            },}
+          }
         ],
 
         phone_number_collection: {
