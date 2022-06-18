@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { zIndex, colors, fontWeight } from "../../utils";
 
-const Container = styled.button`
+const Container = styled.section`
+  padding: 10px;
   width: 170px;
   height: 230px;
   display: flex;
@@ -29,6 +30,7 @@ const Anchor = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-decoration: none;
 `;
 
 const Title = styled.h2`
@@ -48,6 +50,7 @@ const PriceParagraph = styled.p`
   margin: 0;
   width: 100%;
   justify-self: flex-start;
+  text-decoration: ${props => props.lineTrough ? 'line-through' : null};
 `;
 
 const DiscountParagraph = styled.p`
@@ -91,7 +94,7 @@ const TitleContainer = styled.div`
 
 const Products = ({ item, value }) => {
   return (
-    <Link href={`/products/${value.slug.current}`}>
+    <Link href={`/products/${value.slug.current}`} passHref>
       <Anchor>
         <Container>
           <ImageContainer>
@@ -106,14 +109,22 @@ const Products = ({ item, value }) => {
           <TitleContainer>
             <Title>{item.title}</Title>
           </TitleContainer>
-          <TextContainer>
-            <PriceParagraph>{item.price.toFixed(2)} zł</PriceParagraph>
+
             {item.discount != null ? (
+                <TextContainer>
+
+                <PriceParagraph lineTrough>{item.price.toFixed(2)} zł</PriceParagraph>
               <DiscountParagraph>
                 {item.discount.toFixed(2)} zł
               </DiscountParagraph>
-            ) : null}
-          </TextContainer>
+                </TextContainer>
+
+            ) :                 <TextContainer>
+              <PriceParagraph>{item.price.toFixed(2)} zł</PriceParagraph>
+
+            </TextContainer>
+
+            }
         </Container>
       </Anchor>
     </Link>

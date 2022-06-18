@@ -9,6 +9,7 @@ import { colors, zIndex } from "../utils";
 import sanityClient from "../utils/client";
 import Image from "next/image";
 import Link from "next/link";
+import Loading from "../components/layoutComponents/loading";
 
 const HelperContainer = styled.div`
   width: 100%;
@@ -57,17 +58,41 @@ const ButtonStyled = styled.button`
   position: absolute;
   bottom: 20%;
   left: 50%;
-  margin-left: -50px;
-  margin-left: -100px;
-
-  width: 200px;
-  height: 50px;
-  border: none;
+  margin-left: -60px;
+  margin-left: -125px;
+  padding: 10px;
+  width: 250px;
+  height: 60px;
   background: none;
-  text-decoration: underline;
-  color: ${colors.defaultWhiteHEX};
+  border: 2px solid ${colors.ligthGreyHEX};
+  border-radius: 25px;
+  text-transform: uppercase;
+  color: ${colors.ligthGreyHEX};
   cursor: pointer;
   z-index: ${zIndex.level3};
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  outline: none;
+  transition: all .1s ease-out;
+  
+  &:active {
+    outline: none;
+
+    -webkit-box-shadow: -1px 2px 18px 6px rgba(241, 241, 241, .5);
+    -moz-box-shadow: -1px 2px 18px 6px rgba(241, 241, 241, .5);
+    box-shadow: -1px 2px 18px 6px rgba(241, 241, 241, .5);
+    transform: scale(.95);
+
+  }
+  
+  &:hover {
+    -webkit-box-shadow: -1px 2px 18px 6px rgba(241, 241, 241, .5);
+    -moz-box-shadow: -1px 2px 18px 6px rgba(241, 241, 241, .5);
+    box-shadow: -1px 2px 18px 6px rgba(241, 241, 241, .5);
+  }
 
   @media (min-width: 786px) {
     font-size: 20px;
@@ -75,6 +100,17 @@ const ButtonStyled = styled.button`
     margin-left: -150px;
   }
 `;
+
+const LoadingPageStyled = styled.div`
+
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+`
 
 const Anchor = styled.a`
   text-decoration: none;
@@ -129,12 +165,12 @@ export default function Home() {
       <HelperContainer>
         <HeroImage />
         <ButtonStyled onClick={handleScroll}>
-          Naciśnij i sprawdź <br />
+          rozpocznij zakupy
           <Image src='/arrow.png' width={20} height={20} />
         </ButtonStyled>
       </HelperContainer>
       <Container>
-        <Link href='/categories/nowosci'>
+        <Link href='/categories/nowosci' passHref>
           <Anchor>
             <Subject id='theFirst'>Nowości</Subject>
           </Anchor>
@@ -143,10 +179,10 @@ export default function Home() {
           {isLoading ? (
             <ProductsList value='nowości' items={isData} />
           ) : (
-            <p>loading</p>
+              <Loading/>
           )}
         </InnerContainer>
-        <Link href='/categories/promocje'>
+        <Link href='/categories/promocje' passHref>
           <Anchor>
             <Subject>Promocje</Subject>
           </Anchor>
@@ -155,10 +191,10 @@ export default function Home() {
           {isLoading ? (
             <ProductsList value='promocje' items={isData} />
           ) : (
-            <p>loading</p>
+              <Loading/>
           )}
         </InnerContainer>
-        <Link href='/categories/popularne'>
+        <Link href='/categories/popularne' passHref>
           <Anchor>
             <Subject>Popularne</Subject>
           </Anchor>
@@ -167,7 +203,7 @@ export default function Home() {
           {isLoading ? (
             <ProductsList value='popularne' items={isData} />
           ) : (
-            <p>loading</p>
+            <Loading/>
           )}
         </InnerContainer>
       </Container>

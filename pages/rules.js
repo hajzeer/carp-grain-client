@@ -110,10 +110,11 @@ const Rules = () => {
         </ListOrdered>
         <Paragraph>III. Kontakt ze Sklepem</Paragraph>
         <ListOrdered type='1'>
-          <li>Adres Sprzedawcy: …………..</li>
+          <li>Adres Sprzedawcy: Ul.Olszynki 11
+            44-100 Gliwice </li>
           <li>Adres e-mail Sprzedawcy: carpgrains@wp.pl</li>
           <li>Numer telefonu Sprzedawcy: 690 690 157</li>
-          <li>Numer rachunku bankowego Sprzedawcy …………………………….</li>
+          <li>Numer rachunku bankowego Sprzedawcy  73 1050 1298 1000 0092 5258 2250</li>
           <li>
             Klient może porozumiewać się ze Sprzedawcą za pomocą adresów i
             numerów telefonów podanych w niniejszym paragrafie.
@@ -236,7 +237,8 @@ const Rules = () => {
             <br />
             b. Przesyłka kurierska, przesyłka kurierska pobraniowa,
             <br />
-            c. Odbiór osobisty dostępny pod adresem: ……………….
+            c. Odbiór osobisty dostępny pod adresem: Ul.Olszynki 11
+            44-100 Gliwice
           </li>
           <li>
             Klient może skorzystać z następujących metod płatności:
@@ -248,8 +250,6 @@ const Rules = () => {
             c. Płatność przelewem na konto Sprzedawcy
             <br />
             d. Płatności elektroniczne
-            <br />
-            e. Płatność kartą płatniczą.
             <br />
           </li>
           <li>

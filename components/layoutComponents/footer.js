@@ -35,7 +35,7 @@ const ContainerFooter = styled.footer`
 const Footer = () => {
   return (
     <ContainerFooter>
-      <h3> Carp Grain </h3>
+      <h3> Carp Grains </h3>
       <p>Kontakt: </p>
       <a href='tel:+48-690-690-157'>+48 690 690 157</a>
       <br />
@@ -43,7 +43,7 @@ const Footer = () => {
       <p>
         Numer konta:
         <br />
-        00 1111 2222 3333 4444 5555 6666
+          73 1050 1298 1000 0092 5258 2250
       </p>
       <p>
         Polityka prywatności: <br />©{new Date().getFullYear()} Created by

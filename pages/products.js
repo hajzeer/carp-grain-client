@@ -9,6 +9,7 @@ import sanityClient from "../utils/client";
 import { colors, fontWeight, zIndex } from "../utils";
 import ProductsListForPage from "../components/ProductComponents/ProductListForPage";
 import { byPriceLowest, byPriceHighest } from "../functions/helpFunc";
+import Loading from "../components/layoutComponents/loading";
 
 const Container = styled.div`
   width: 100%;
@@ -28,6 +29,7 @@ const InnerContainer = styled.div`
   margin: 100px 0 0 0;
   padding: 0 0 15% 0;
 
+  
   @media (min-width: 1024px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     width: 80%;
@@ -38,7 +40,16 @@ const InnerContainer = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 `;
+const LoadingPageStyled = styled.div`
 
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+`
 const FormStyled = styled.form`
   z-index: ${zIndex.level7};
   background: ${colors.darkGreyHEX};
@@ -188,9 +199,13 @@ const Products = () => {
             </ListContainer>
           </FieldsetStyled>
         </FormStyled>
-        <InnerContainer>
-          {isLoading ? <ProductsListForPage items={isData} /> : <p>loading</p>}
-        </InnerContainer>
+          {isLoading ?
+              <InnerContainer>
+                <ProductsListForPage items={isData} />
+              </InnerContainer>
+              :<LoadingPageStyled>
+            <Loading/>
+          </LoadingPageStyled> }
       </Container>
     </Layout>
   );
