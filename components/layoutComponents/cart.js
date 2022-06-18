@@ -88,7 +88,7 @@ const Cart = ({ isVisible }) => {
   const NavBarHelperTween = useRef(null);
   const [isFinalPrice, setIsFinalPrice] = useState(0);
 
-  const { cart } = useContext(CartContext);
+  const { cart,setCart } = useContext(CartContext);
   const handleCheckout = async (e) => {
     e.preventDefault();
 
@@ -100,6 +100,7 @@ const Cart = ({ isVisible }) => {
     }
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
     //if nothing went wrong, sends user to Stripe checkout
+    setCart([])
     await stripe.redirectToCheckout({sessionId: response.id});
   };
   useEffect(() => {

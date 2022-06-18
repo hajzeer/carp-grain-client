@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY, {
     // https://github.com/stripe/stripe-node#configuration
     apiVersion: "2020-03-02",
 });

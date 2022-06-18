@@ -37,9 +37,9 @@ const Footer = () => {
     <ContainerFooter>
       <h3> Carp Grain </h3>
       <p>Kontakt: </p>
-      <a href='tel:+48-123-456-789'>+48 123 456 789</a>
+      <a href='tel:+48-690-690-157'>+48 690 690 157</a>
       <br />
-      <a href='mailto:mail@mail.com'>mail@mail.com</a>
+      <a href='mailto:carpgrains@wp.pl'>carpgrains@wp.pl</a>
       <p>
         Numer konta:
         <br />
@@ -47,7 +47,7 @@ const Footer = () => {
       </p>
       <p>
         Polityka prywatności: <br />©{new Date().getFullYear()} Created by
-        hiThere Studio for Carp Grain <br />
+        hiThere Studio for Carp Grains <br />
         All rights reserved
       </p>
     </ContainerFooter>

@@ -59,8 +59,12 @@ const ParagraphTitle = styled.p`
   color: ${colors.ligthGreyHEX};
   font-size: 12px;
   margin: 0;
+  
+  
   @media (min-width: 786px) {
-    font-size: 18px;
+    font-size: 15px;
+    width: 300px;
+
   }
 `;
 

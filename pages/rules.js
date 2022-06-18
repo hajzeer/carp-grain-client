@@ -31,13 +31,13 @@ const Rules = () => {
         <Paragraph>I. Postanowienia wstępne</Paragraph>
         <ListOrdered type='1'>
           <li>
-            Sklep internetowy ……………………….. (nazwa sklepu), dostępny pod adresem
-            internetowym ………………………………, prowadzony jest przez.............. (imię
-            i nazwisko) prowadzącego działalność gospodarczą pod firmą
-            ......................, wpisaną do Centralnej Ewidencji i Informacji
+            Sklep internetowy Carp Grains, dostępny pod adresem
+            internetowym carpgrains.pl prowadzony jest przez Dariusza Lesznar
+            prowadzącego działalność gospodarczą pod firmą
+            CARP GRAINS LESZNAR DARIUSZ, wpisaną do Centralnej Ewidencji i Informacji
             o Działalności Gospodarczej (CEIDG) prowadzonej przez ministra
-            właściwego ds. gospodarki, NIP .............., REGON
-            .....................
+            właściwego ds. gospodarki, NIP 6312677833, REGON
+            369272669
           </li>
           <li>
             Niniejszy regulamin skierowany jest do Konsumentów i określa zasady
@@ -54,10 +54,10 @@ const Rules = () => {
           </li>
           <li>
             Sprzedawca - osoba fizyczna prowadząca działalność gospodarczą pod
-            firmą ......................, wpisaną do Centralnej Ewidencji i
-            Informacji o Działalności Gospodarczej (CEIDG) prowadzonej przez
-            ministra właściwego ds. gospodarki, NIP .............., REGON
-            ......................
+            firmą  CARP GRAINS LESZNAR DARIUSZ, wpisaną do Centralnej Ewidencji i Informacji
+            o Działalności Gospodarczej (CEIDG) prowadzonej przez ministra
+            właściwego ds. gospodarki, NIP 6312677833, REGON
+            369272669
           </li>
           <li>
             Klient - każdy podmiot dokonujący zakupów za pośrednictwem Sklepu.
@@ -70,7 +70,7 @@ const Rules = () => {
           </li>
           <li>
             Sklep - sklep internetowy prowadzony przez Sprzedawcę pod adresem
-            internetowym …………………..
+            internetowym carpgrains.pl
           </li>
           <li>
             Umowa zawarta na odległość - umowa zawarta z Klientem w ramach
@@ -111,9 +111,8 @@ const Rules = () => {
         <Paragraph>III. Kontakt ze Sklepem</Paragraph>
         <ListOrdered type='1'>
           <li>Adres Sprzedawcy: …………..</li>
-          <li>Adres e-mail Sprzedawcy: ………………..</li>
-          <li>Numer telefonu Sprzedawcy: ………………</li>
-          <li>Numer fax Sprzedawcy …………………….</li>
+          <li>Adres e-mail Sprzedawcy: carpgrains@wp.pl</li>
+          <li>Numer telefonu Sprzedawcy: 690 690 157</li>
           <li>Numer rachunku bankowego Sprzedawcy …………………………….</li>
           <li>
             Klient może porozumiewać się ze Sprzedawcą za pomocą adresów i
@@ -121,7 +120,7 @@ const Rules = () => {
           </li>
           <li>
             Klient może porozumieć się telefonicznie ze Sprzedawcą w
-            godzinach………….
+            godzinach 9-18
           </li>
         </ListOrdered>
         <Paragraph>IV. Wymagania techniczne</Paragraph>
@@ -131,12 +130,10 @@ const Rules = () => {
             składania zamówień na Produkty, niezbędne są:
             <br />
             a. urządzenie końcowe z dostępem do sieci Internet i przeglądarką
-            internetową typu ……………………………., <br />
+            internetową, <br />
             b. aktywne konto poczty elektronicznej (e-mail),
             <br />
             c. włączona obsługa plików cookies,
-            <br />
-            d. zainstalowany program FlashPlayer.
             <br />
           </li>
         </ListOrdered>
@@ -185,7 +182,7 @@ const Rules = () => {
         <ListOrdered type='1'>
           <li>
             Aby założyć Konto w Sklepie, należy wypełnić Formularz rejestracji.
-            Niezbędne jest podanie następujących danych ………………………………………………………...
+            Niezbędne jest podanie następujących danych imię, nazwisko, adres e-mail, adres zamieszkania
           </li>
           <li>Założenie Konta w Sklepie jest darmowe.</li>
           <li>
@@ -335,8 +332,7 @@ const Rules = () => {
             odbiorze osobistym – od dnia zawarcia Umowy Sprzedaży.
           </li>
           <li>
-            Dostawa Produktu odbywa się na terenie ……………….... (Unii
-            Europejskiej, Europy, etc)
+            Dostawa Produktu odbywa się na terenie Unii Europejskiej
           </li>
           <li>
             Dostawa Produktu do Klienta jest odpłatna, chyba że Umowa Sprzedaży

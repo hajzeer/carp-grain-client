@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       const params = {
         submit_type: 'pay',
         mode: 'payment',
-        payment_method_types: ['card', 'p24'],
+        payment_method_types: ['card', 'p24', 'cash'],
         billing_address_collection: 'auto',
         shipping_address_collection: {
           allowed_countries: ['PL'],
