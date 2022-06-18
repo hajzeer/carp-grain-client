@@ -70,6 +70,7 @@ const PriceSubject = styled.h2`
   font-size: ${(props) => (props.discount ? `40px` : `${fontSize.bigFont}`)};
   padding: 0;
   text-align: center;
+  text-decoration: ${props => props.lineTrough ? 'line-through' : null};
 `;
 
 const ContentContainer = styled.div`
@@ -439,9 +440,9 @@ const ProductPage = ({ product }) => {
         <AboutContainer>
           <Subject>{product.title}</Subject>
           {isParsed != null && product.variants ? (
-            <PriceSubject>{isParsed.price.toFixed(2)} zł</PriceSubject>
+            <PriceSubject lineTrough={!!isParsed.discount}>{isParsed.price.toFixed(2)} zł</PriceSubject>
           ) : (
-            <PriceSubject>
+            <PriceSubject lineTrough={!!product.defaultProductVariant.discount}>
               {product.defaultProductVariant.price.toFixed(2)} zł
             </PriceSubject>
           )}
