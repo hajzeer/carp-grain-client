@@ -8,6 +8,7 @@ import SanityClient from "../../utils/client";
 import { colors, fontWeight, zIndex } from "../../utils";
 import ProductsListForPage from "../../components/ProductComponents/ProductListForPage";
 import { byPriceLowest, byPriceHighest } from "../../functions/helpFunc";
+import Head from "next/head";
 
 const Container = styled.div`
   width: 100%;
@@ -126,6 +127,9 @@ const ProducerPage = ({ producer }) => {
 
   return (
     <Layout>
+      <Head>
+        <title>Carp Grains | Profesjonalny sklep wędkarski | {producer.title}</title>
+      </Head>
       <Container>
         <FormStyled>
           <FieldsetStyled>

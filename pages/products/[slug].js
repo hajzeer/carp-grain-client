@@ -12,6 +12,7 @@ import YouTube from 'react-youtube';
 import getYouTubeId from 'get-youtube-id';
 import { useSwipeable } from 'react-swipeable';
 import { CartContext } from '../../context/cartContext';
+import Head from "next/head";
 
 const Container = styled.div`
   width: 100%;
@@ -413,6 +414,10 @@ const ProductPage = ({ product }) => {
   }, [isSelected]);
   return (
     <Layout>
+      <Head>
+        <title>Carp Grains | Profesjonalny sklep wędkarski | {product.title}</title>
+        <meta name='description' content={product.body.pl}/>
+      </Head>
       <Container>
         <HelperContainer>
           <ImageDiv ref={refPassthrough}>

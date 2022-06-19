@@ -21,13 +21,14 @@ const Layout = ({ children }) => {
     <>
       <GlobalStyle />
       <Head>
-        <title>Carp Grains</title>
+        <title>Carp Grains | Profesjonalny sklep wędkarski</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;700&display=swap"
           rel="stylesheet"
         />
+          <link rel="icon" href="../public/logo.png"/>
       </Head>
       <section>
         <Header />

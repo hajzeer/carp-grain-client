@@ -7,7 +7,7 @@ import { zIndex, colors, fontWeight } from "../../utils";
 
 const Container = styled.section`
   padding: 10px;
-  width: 170px;
+  width: 160px;
   height: 230px;
   display: flex;
   flex-direction: column;
@@ -21,6 +21,7 @@ const Container = styled.section`
   @media (min-width: 786px) {
     width: 230px;
     height: 320px;
+    padding: 15px;
   }
 `;
 
@@ -64,7 +65,7 @@ const DiscountParagraph = styled.p`
 `;
 
 const ImageContainer = styled.div`
-  width: 95%;
+  width: 100%;
   height: auto;
 
   padding: 0;
