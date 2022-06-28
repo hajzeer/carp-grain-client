@@ -9,13 +9,32 @@ const Container = styled.div`
   width: 100%;
   height: auto;
 
-  padding: 30px 0 20px 0;
+  //padding: 30px 0 20px 0;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
 `;
+
+const InnerContainer = styled.div`
+  width: 100%;
+  height: auto;
+
+
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 const Paragraph = styled.p`
   margin: 20px;
@@ -28,30 +47,37 @@ const Subject = styled.h3`
   text-transform: uppercase;
 `;
 
+const ImageDiv = styled.div`
+  width: 90%;
+  height: auto;
+  margin: 10px;
+
+
+  @media (min-width: 1024px) {
+    width: 70%;
+    margin: 50px 0;
+    height: auto;
+  }
+`;
+
 const About = () => {
   return (
     <Layout>
       <Container>
+        <InnerContainer>
+          <ImageDiv>
         <Image
           src='/images/about_image.jpg'
-          layout='fixed'
-          width={350}
-          height={350}
+          width={500}
+          height={500}
           objectFit='contain'
         />
-        <Subject>Carp Grain Team</Subject>
+          </ImageDiv>
+        </InnerContainer>
+      <InnerContainer>
+        <Subject>Carp Grains Team</Subject>
         <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus
-          nunc sed felis fermentum, vitae viverra arcu commodo. Sed at eros
-          libero. Quisque maximus leo vitae sapien fermentum, ut ullamcorper
-          odio lacinia. Etiam tristique metus vel risus tempus, ac auctor eros
-          luctus. Nulla vel urna nisi. Nunc aliquam nisl a dolor ultricies, non
-          venenatis justo faucibus. Nulla finibus laoreet ex, sed dictum nunc
-          consequat vitae. Vivamus nec sodales lacus. Interdum et malesuada
-          fames ac ante ipsum primis in faucibus. Mauris ut ante ut dui placerat
-          consequat ut eu metus. Donec ante leo, egestas ac efficitur quis,
-          tincidunt rutrum lectus. Nulla accumsan lorem ac risus tristique
-          ultrices.
+            Carp Grains Team, drużyna mistrzów World Carp Classic 2020, oraz oficlajny dystrybutor Dream Baits, Ridge Monkey, Raptor Boats oraz RCG 
         </Paragraph>
         <Image
           src='/logo.png'
@@ -60,6 +86,7 @@ const About = () => {
           height={100}
           objectFit='contain'
         />
+    </InnerContainer>
       </Container>
     </Layout>
   );
